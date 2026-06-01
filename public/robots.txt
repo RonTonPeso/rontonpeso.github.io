@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://rontonpeso.github.io/ron-website/sitemap-index.xml
+Sitemap: https://rontonpeso.github.io/sitemap-index.xml
