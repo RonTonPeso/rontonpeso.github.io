@@ -17,6 +17,7 @@ export const projects: Project[] = [
 		slug: "forest-bush",
 		title: "Forest Bush",
 		kind: "Infrastructure",
+		logo: "forest_bush_logo.png",
 		description:
 			"A self-hosted feature flag service with an Express API, PostgreSQL persistence, Redis-backed evaluation caching, a React admin dashboard, and a small JavaScript SDK.",
 		details: [

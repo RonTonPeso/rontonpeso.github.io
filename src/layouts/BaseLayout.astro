@@ -630,7 +630,8 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 			img.row-logo {
 				width: 100%;
 				height: 100%;
-				object-fit: cover;
+				padding: 0.3rem;
+				object-fit: contain;
 			}
 
 			.project-row:hover .row-logo,
