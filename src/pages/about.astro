@@ -15,13 +15,29 @@ const aboutPhoto = `${basePath}delta_ronnie_wang%20copy.jpg`;
 		<p class="kicker">About the engineer</p>
 		<h1 class="page-title">About</h1>
 		<div class="about-layout">
-			<figure class="about-photo">
-				<img
-					src={aboutPhoto}
-					alt="Ronnie Wang sitting near large green plants by a window"
-				/>
-				<figcaption>Ronnie Wang</figcaption>
-			</figure>
+			<div class="about-side">
+				<figure class="about-photo">
+					<img
+						src={aboutPhoto}
+						alt="Ronnie Wang sitting near large green plants by a window"
+					/>
+					<figcaption>Ronnie Wang</figcaption>
+				</figure>
+				<dl class="about-facts">
+					<div>
+						<dt>Studying</dt>
+						<dd>Computer Science, BSE + Masters, Penn Engineering</dd>
+					</div>
+					<div>
+						<dt>Research</dt>
+						<dd>Li Group · material informatics with machine learning</dd>
+					</div>
+					<div>
+						<dt>Building</dt>
+						<dd>Penn Mobile · Android</dd>
+					</div>
+				</dl>
+			</div>
 			<div>
 				<div class="prose">
 					<p>

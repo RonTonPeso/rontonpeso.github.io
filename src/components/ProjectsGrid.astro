@@ -9,22 +9,26 @@ const basePath = import.meta.env.BASE_URL.endsWith("/")
 
 <section id="projects" class="page-section" aria-labelledby="projects-heading">
 	<h2 id="projects-heading" class="section-heading">{heading}</h2>
-	<div class="projects-grid">
+	<div class="project-rows">
 		{
 			projects.map((project, index) => (
-				<article class="project-card" style={`--card-index: ${index}`}>
-					<div class="project-card-header">
-						<a class="project-card-link" href={`${basePath}projects/${project.slug}`}>
-							<h3>{project.title}</h3>
-						</a>
-						<span class="project-number">{String(index + 1).padStart(2, "0")}</span>
+				<article class="project-row" data-reveal style={`--card-index: ${index}`}>
+					<span class="row-index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+					<div class="row-body">
+						{project.kind && <span class="row-kind">{project.kind}</span>}
+						<h3 class="row-title">
+							<a class="row-link" href={`${basePath}projects/${project.slug}`}>
+								{project.title}
+								<span class="row-arrow" aria-hidden="true">&#8599;</span>
+							</a>
+						</h3>
+						<p class="row-desc">{project.description}</p>
+						<ul class="project-tags" aria-label={`${project.title} technologies`}>
+							{project.tags.map((tag) => (
+								<li>{tag}</li>
+							))}
+						</ul>
 					</div>
-					<p>{project.description}</p>
-					<ul class="project-tags" aria-label={`${project.title} technologies`}>
-						{project.tags.map((tag) => (
-							<li>{tag}</li>
-						))}
-					</ul>
 				</article>
 			))
 		}

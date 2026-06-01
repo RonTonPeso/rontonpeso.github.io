@@ -235,6 +235,18 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 				color: var(--green);
 			}
 
+			.nav-links a[aria-current="page"]::after {
+				position: absolute;
+				right: 0;
+				bottom: -0.5rem;
+				left: 0;
+				height: 2px;
+				border-radius: 2px;
+				background: linear-gradient(90deg, var(--green), var(--cyan));
+				box-shadow: 0 0 12px rgba(112, 255, 158, 0.6);
+				content: "";
+			}
+
 			.nav-links a:hover,
 			.nav-links a:focus-visible {
 				color: var(--green);
@@ -347,118 +359,142 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 				line-height: 1;
 			}
 
-			.projects-grid {
-				display: grid;
-				grid-template-columns: repeat(2, minmax(0, 1fr));
-				gap: 1.1rem;
+			/* projects as editorial index rows, not a grid */
+			.project-rows {
+				display: flex;
+				flex-direction: column;
 			}
 
-			.project-card {
+			.project-row {
 				position: relative;
 				display: grid;
-				min-height: 19rem;
-				border: 1px solid var(--line);
-				border-radius: 16px;
-				/* dark aurora glass */
-				background: linear-gradient(158deg, rgba(20, 35, 48, 0.72), rgba(8, 15, 25, 0.66));
-				backdrop-filter: blur(14px);
-				box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
-				color: var(--ink);
-				padding: 1.7rem 1.7rem 1.6rem 2.1rem;
-				overflow: hidden;
-				transition:
-					transform 200ms ease,
-					box-shadow 200ms ease,
-					border-color 200ms ease;
-				animation: reveal-up 700ms ease-out both;
-				animation-delay: calc(var(--card-index, 0) * 85ms);
+				grid-template-columns: 6rem minmax(0, 1fr);
+				gap: 1.8rem;
+				align-items: baseline;
+				padding: 2.6rem 1.25rem 2.6rem 0.75rem;
+				border-top: 1px solid var(--line);
+				isolation: isolate;
+				transition: padding-left 240ms ease;
 			}
 
-			.project-card:hover,
-			.project-card:focus-within {
-				border-color: rgba(112, 255, 158, 0.5);
-				box-shadow: 0 34px 96px rgba(0, 0, 0, 0.55), 0 0 44px rgba(112, 255, 158, 0.12);
-				transform: translateY(-5px);
+			.project-row:last-child {
+				border-bottom: 1px solid var(--line);
 			}
 
-			/* aurora accent on the left edge */
-			.project-card::before {
+			/* aurora glow sweeps in from the left on hover */
+			.project-row::before {
 				position: absolute;
-				inset: 1.4rem auto 1.4rem 1rem;
-				width: 3px;
-				border-radius: 3px;
-				background: linear-gradient(var(--green), var(--cyan), var(--violet));
+				inset: 0;
+				z-index: -1;
+				background: linear-gradient(
+					90deg,
+					rgba(112, 255, 158, 0.09),
+					rgba(97, 242, 255, 0.05) 38%,
+					transparent 68%
+				);
 				content: "";
-				opacity: 0.9;
+				opacity: 0;
+				transition: opacity 240ms ease;
 			}
 
-			/* aurora glow in the corner, brightens on hover */
-			.project-card::after {
-				position: absolute;
-				inset: -45% -35% auto auto;
-				z-index: 0;
-				width: 75%;
-				height: 75%;
-				background: radial-gradient(circle, rgba(97, 242, 255, 0.16), transparent 65%);
-				content: "";
-				opacity: 0.45;
-				pointer-events: none;
-				transition: opacity 200ms ease;
-			}
-
-			.project-card:hover::after,
-			.project-card:focus-within::after {
+			.project-row:hover::before,
+			.project-row:focus-within::before {
 				opacity: 1;
 			}
 
-			.project-card > * {
-				position: relative;
-				z-index: 1;
+			.project-row:hover,
+			.project-row:focus-within {
+				padding-left: 1.6rem;
 			}
 
-			.project-card-header {
-				display: flex;
-				align-items: flex-start;
-				justify-content: space-between;
-				gap: 1rem;
+			/* ghost-outline index number that fills with aurora on hover */
+			.row-index {
+				font-family: "Fraunces", Georgia, serif;
+				font-size: 3.4rem;
+				font-weight: 900;
+				letter-spacing: -0.02em;
+				line-height: 1;
+				color: rgba(132, 152, 154, 0.5);
+				transition:
+					color 240ms ease,
+					-webkit-text-stroke-color 240ms ease;
 			}
 
-			.project-card-link {
-				display: block;
+			@supports (-webkit-text-stroke: 1px black) {
+				.row-index {
+					color: transparent;
+					-webkit-text-stroke: 1px var(--ink-soft);
+				}
+			}
+
+			.project-row:hover .row-index,
+			.project-row:focus-within .row-index {
+				color: var(--green);
+				-webkit-text-stroke-color: transparent;
+			}
+
+			.row-kind {
+				display: inline-block;
+				margin: 0 0 0.55rem;
+				color: var(--cyan);
+				font-family: "IBM Plex Mono", monospace;
+				font-size: 0.74rem;
+				font-weight: 500;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+			}
+
+			.row-title {
+				margin: 0;
+				font-family: "Fraunces", Georgia, serif;
+				font-size: 2.3rem;
+				font-weight: 800;
+				letter-spacing: -0.015em;
+				line-height: 1.04;
+			}
+
+			.row-link {
 				color: var(--ink);
+				transition: color 200ms ease;
 			}
 
-			.project-card-link:hover,
-			.project-card-link:focus-visible,
+			.project-row:hover .row-link,
+			.row-link:focus-visible {
+				color: var(--green);
+			}
+
+			.row-arrow {
+				display: inline-block;
+				margin-left: 0.5rem;
+				color: var(--green);
+				font-size: 0.62em;
+				opacity: 0;
+				transform: translate(-5px, 5px);
+				transition:
+					opacity 200ms ease,
+					transform 200ms ease;
+			}
+
+			.project-row:hover .row-arrow,
+			.row-link:focus-visible .row-arrow {
+				opacity: 1;
+				transform: translate(0, 0);
+			}
+
+			.row-desc {
+				max-width: 62ch;
+				margin: 0.9rem 0 0;
+				color: var(--ink-muted);
+				font-size: 1.02rem;
+				line-height: 1.6;
+			}
+
 			.link-row a:hover,
 			.link-row a:focus-visible,
 			.back-link:hover,
 			.back-link:focus-visible {
 				text-decoration: underline;
 				text-underline-offset: 0.3em;
-			}
-
-			.project-card h3 {
-				margin: 0;
-				font-family: "Fraunces", Georgia, serif;
-				font-size: 1.75rem;
-				font-weight: 800;
-				letter-spacing: -0.01em;
-				line-height: 1.08;
-			}
-
-			.project-card p {
-				margin: 1.1rem 0 0;
-				color: var(--ink-muted);
-				font-size: 1rem;
-				line-height: 1.62;
-			}
-
-			.project-number {
-				color: var(--ink-soft);
-				font-family: "IBM Plex Mono", monospace;
-				font-size: 0.82rem;
-				font-weight: 600;
 			}
 
 			.project-tags {
@@ -583,7 +619,7 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 				inset: -1px;
 				z-index: -1;
 				border-radius: var(--radius);
-				background: linear-gradient(135deg, var(--green), var(--cyan), var(--red), var(--violet));
+				background: linear-gradient(135deg, var(--green), var(--cyan), var(--violet));
 				content: "";
 				filter: blur(18px);
 				opacity: 0.42;
@@ -605,6 +641,103 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 				color: var(--ink-soft);
 				font-family: "IBM Plex Mono", monospace;
 				font-size: 0.8rem;
+			}
+
+			.about-side {
+				display: grid;
+				gap: 1.7rem;
+			}
+
+			/* field-notes style fact list */
+			.about-facts {
+				display: grid;
+				gap: 1rem;
+				margin: 0;
+			}
+
+			.about-facts > div {
+				display: grid;
+				gap: 0.25rem;
+				border-left: 1px solid var(--line);
+				padding-left: 0.9rem;
+			}
+
+			.about-facts dt {
+				color: var(--cyan);
+				font-family: "IBM Plex Mono", monospace;
+				font-size: 0.7rem;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+			}
+
+			.about-facts dd {
+				margin: 0;
+				color: var(--ink-muted);
+				font-size: 0.95rem;
+				line-height: 1.45;
+			}
+
+			.site-footer {
+				position: relative;
+				z-index: 1;
+				margin-top: 5rem;
+				border-top: 1px solid var(--line);
+				background: linear-gradient(180deg, transparent, rgba(2, 6, 10, 0.5));
+			}
+
+			.footer-inner {
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+				width: min(var(--page), calc(100% - 2rem));
+				margin: 0 auto;
+				padding: 2rem 0 2.6rem;
+			}
+
+			.footer-name {
+				color: var(--ink);
+				font-family: "Fraunces", Georgia, serif;
+				font-size: 1.05rem;
+				font-weight: 800;
+				letter-spacing: -0.01em;
+			}
+
+			.footer-links {
+				display: flex;
+				gap: 1.4rem;
+			}
+
+			.footer-links a,
+			.footer-meta {
+				color: var(--ink-soft);
+				font-family: "IBM Plex Mono", monospace;
+				font-size: 0.82rem;
+			}
+
+			.footer-links a {
+				transition: color 180ms ease;
+			}
+
+			.footer-links a:hover,
+			.footer-links a:focus-visible {
+				color: var(--green);
+			}
+
+			/* scroll reveal: only hides when JS marks the page ready, so no-JS stays visible */
+			.reveal-ready [data-reveal] {
+				opacity: 0;
+				transform: translateY(24px);
+			}
+
+			.reveal-ready [data-reveal].in-view {
+				opacity: 1;
+				transform: translateY(0);
+				transition:
+					opacity 720ms cubic-bezier(0.2, 0.65, 0.3, 1),
+					transform 720ms cubic-bezier(0.2, 0.65, 0.3, 1);
+				transition-delay: calc(var(--card-index, 0) * 80ms);
 			}
 
 			@keyframes aurora-drift {
@@ -702,12 +835,29 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 					padding: 5rem 0;
 				}
 
-				.projects-grid {
+				.project-row {
 					grid-template-columns: 1fr;
+					gap: 0.5rem;
+					padding: 2rem 0.5rem;
 				}
 
-				.project-card {
-					min-height: 18rem;
+				.project-row:hover,
+				.project-row:focus-within {
+					padding-left: 0.9rem;
+				}
+
+				.row-index {
+					font-size: 2.4rem;
+				}
+
+				.row-title {
+					font-size: 1.85rem;
+				}
+
+				.footer-inner {
+					flex-direction: column;
+					align-items: flex-start;
+					gap: 0.7rem;
 				}
 			}
 
@@ -745,5 +895,38 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 		<main>
 			<slot />
 		</main>
+		<footer class="site-footer">
+			<div class="footer-inner">
+				<span class="footer-name">Ronnie Wang</span>
+				<nav class="footer-links" aria-label="Footer">
+					<a href="mailto:wronnie@seas.upenn.edu">Email</a>
+					<a href="https://github.com/RonTonPeso">GitHub</a>
+				</nav>
+				<span class="footer-meta">© 2026 · Built with Astro</span>
+			</div>
+		</footer>
+		<script is:inline>
+			(function () {
+				// reduced-motion users skip reveal entirely; content stays visible
+				if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+				document.documentElement.classList.add("reveal-ready");
+				addEventListener("DOMContentLoaded", function () {
+					var io = new IntersectionObserver(
+						function (entries) {
+							entries.forEach(function (entry) {
+								if (entry.isIntersecting) {
+									entry.target.classList.add("in-view");
+									io.unobserve(entry.target);
+								}
+							});
+						},
+						{ rootMargin: "0px 0px -8% 0px", threshold: 0.05 }
+					);
+					document.querySelectorAll("[data-reveal]").forEach(function (el) {
+						io.observe(el);
+					});
+				});
+			})();
+		</script>
 	</body>
 </html>

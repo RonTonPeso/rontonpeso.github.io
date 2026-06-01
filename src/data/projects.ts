@@ -1,6 +1,7 @@
 export type Project = {
 	slug: string;
 	title: string;
+	kind: string;
 	description: string;
 	details: string[];
 	tags: string[];
@@ -14,6 +15,7 @@ export const projects: Project[] = [
 	{
 		slug: "forest-bush",
 		title: "Forest Bush",
+		kind: "Infrastructure",
 		description:
 			"A self-hosted feature flag service with an Express API, PostgreSQL persistence, Redis-backed evaluation caching, a React admin dashboard, and a small JavaScript SDK.",
 		details: [
@@ -27,6 +29,7 @@ export const projects: Project[] = [
 	{
 		slug: "nba-player-props",
 		title: "NBA Player Props",
+		kind: "Research",
 		description:
 			"A forecasting system that compares Kalshi NBA player prop prices against calibrated posterior distributions for points, rebounds, and assists.",
 		details: [
@@ -41,6 +44,7 @@ export const projects: Project[] = [
 	{
 		slug: "pennos",
 		title: "PennOS",
+		kind: "Systems",
 		description:
 			"A single-process, multi-threaded operating system with a priority scheduler, process lifecycle, interactive shell, PennFAT filesystem, and syscall abstraction.",
 		details: [
