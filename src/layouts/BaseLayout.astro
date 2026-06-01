@@ -20,7 +20,7 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
 		<meta property="og:title" content={title} />
@@ -35,7 +35,7 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800;9..144,900&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap"
 			rel="stylesheet"
 		/>
 		<title>{title}</title>
@@ -198,9 +198,9 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 				gap: 0.7rem;
 				color: var(--ink);
 				font-family: "Fraunces", Georgia, serif;
-				font-size: 1.02rem;
-				font-weight: 700;
-				letter-spacing: 0;
+				font-size: 1.05rem;
+				font-weight: 800;
+				letter-spacing: -0.01em;
 				/* dark halo keeps the text legible against bright aurora */
 				text-shadow: 0 1px 16px rgba(3, 9, 16, 0.95), 0 0 30px rgba(3, 9, 16, 0.7);
 			}
@@ -258,16 +258,16 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 
 			.page-section::before {
 				position: absolute;
-				inset: 2rem -8vw auto;
+				inset: 1rem -8vw auto;
 				z-index: -1;
-				height: 34rem;
+				height: 30rem;
+				/* soft radial blooms, no hard edges */
 				background:
-					linear-gradient(108deg, transparent 8%, rgba(112, 255, 158, 0.15), transparent 36%),
-					linear-gradient(118deg, transparent 24%, rgba(84, 137, 255, 0.14), transparent 55%),
-					linear-gradient(101deg, transparent 52%, rgba(255, 93, 111, 0.12), transparent 78%);
+					radial-gradient(50% 70% at 24% 28%, rgba(112, 255, 158, 0.13), transparent 70%),
+					radial-gradient(52% 72% at 68% 36%, rgba(84, 137, 255, 0.12), transparent 72%);
 				content: "";
-				filter: blur(40px);
-				opacity: 0.92;
+				filter: blur(48px);
+				opacity: 0.9;
 				pointer-events: none;
 			}
 
@@ -284,20 +284,18 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 
 			.hero::before {
 				position: absolute;
-				inset: 7rem -10vw auto auto;
+				inset: -4rem -12vw auto -6vw;
 				z-index: -1;
-				width: min(42rem, 86vw);
-				height: 24rem;
+				height: 34rem;
+				/* organic aurora bloom that fades to nothing, no rectangle */
 				background:
-					linear-gradient(105deg, rgba(112, 255, 158, 0.28), transparent 39%),
-					linear-gradient(122deg, transparent 20%, rgba(97, 242, 255, 0.24), transparent 58%),
-					linear-gradient(98deg, transparent 44%, rgba(255, 93, 111, 0.2), transparent 70%),
-					linear-gradient(115deg, transparent 55%, rgba(181, 114, 255, 0.26), transparent 84%);
+					radial-gradient(58% 80% at 72% 32%, rgba(112, 255, 158, 0.22), transparent 70%),
+					radial-gradient(56% 76% at 48% 28%, rgba(97, 242, 255, 0.17), transparent 72%),
+					radial-gradient(52% 72% at 28% 44%, rgba(181, 114, 255, 0.18), transparent 72%);
 				content: "";
-				filter: blur(18px) saturate(140%);
-				opacity: 0.9;
+				filter: blur(52px);
+				opacity: 0.85;
 				pointer-events: none;
-				transform: rotate(-8deg);
 			}
 
 			.hero-content {
@@ -322,10 +320,10 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 				margin: 0;
 				color: var(--ink);
 				font-family: "Fraunces", Georgia, serif;
-				font-size: 5.75rem;
-				font-weight: 700;
-				letter-spacing: 0;
-				line-height: 0.94;
+				font-size: 6rem;
+				font-weight: 900;
+				letter-spacing: -0.025em;
+				line-height: 0.92;
 				text-wrap: balance;
 				/* faint aurora glow lifting the name off the night sky */
 				text-shadow: 0 0 48px rgba(97, 242, 255, 0.18), 0 0 90px rgba(112, 255, 158, 0.12);
@@ -343,9 +341,9 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 				margin: 0 0 1.5rem;
 				color: var(--ink);
 				font-family: "Fraunces", Georgia, serif;
-				font-size: 3.6rem;
-				font-weight: 700;
-				letter-spacing: 0;
+				font-size: 3.8rem;
+				font-weight: 900;
+				letter-spacing: -0.02em;
 				line-height: 1;
 			}
 
@@ -358,39 +356,64 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 			.project-card {
 				position: relative;
 				display: grid;
-				min-height: 21rem;
-				border: 1px solid rgba(29, 49, 47, 0.26);
-				border-radius: var(--radius);
-				background:
-					linear-gradient(rgba(24, 32, 38, 0.045) 1px, transparent 1px),
-					linear-gradient(90deg, rgba(24, 32, 38, 0.035) 1px, transparent 1px),
-					linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(231, 223, 204, 0.96));
-				background-size: 100% 2.05rem, 2.05rem 100%, auto;
-				box-shadow: var(--shadow);
-				color: var(--paper-ink);
-				padding: 1.25rem;
+				min-height: 19rem;
+				border: 1px solid var(--line);
+				border-radius: 16px;
+				/* dark aurora glass */
+				background: linear-gradient(158deg, rgba(20, 35, 48, 0.72), rgba(8, 15, 25, 0.66));
+				backdrop-filter: blur(14px);
+				box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
+				color: var(--ink);
+				padding: 1.7rem 1.7rem 1.6rem 2.1rem;
+				overflow: hidden;
 				transition:
-					transform 180ms ease,
-					box-shadow 180ms ease,
-					border-color 180ms ease;
+					transform 200ms ease,
+					box-shadow 200ms ease,
+					border-color 200ms ease;
 				animation: reveal-up 700ms ease-out both;
 				animation-delay: calc(var(--card-index, 0) * 85ms);
 			}
 
 			.project-card:hover,
 			.project-card:focus-within {
-				border-color: rgba(112, 255, 158, 0.52);
-				box-shadow: 0 30px 90px rgba(0, 0, 0, 0.48), 0 0 34px rgba(112, 255, 158, 0.14);
-				transform: translateY(-4px);
+				border-color: rgba(112, 255, 158, 0.5);
+				box-shadow: 0 34px 96px rgba(0, 0, 0, 0.55), 0 0 44px rgba(112, 255, 158, 0.12);
+				transform: translateY(-5px);
 			}
 
+			/* aurora accent on the left edge */
 			.project-card::before {
 				position: absolute;
-				inset: 0.75rem auto 0.75rem 0.75rem;
+				inset: 1.4rem auto 1.4rem 1rem;
 				width: 3px;
-				background: linear-gradient(var(--green), var(--cyan), var(--red), var(--violet));
+				border-radius: 3px;
+				background: linear-gradient(var(--green), var(--cyan), var(--violet));
 				content: "";
-				opacity: 0.86;
+				opacity: 0.9;
+			}
+
+			/* aurora glow in the corner, brightens on hover */
+			.project-card::after {
+				position: absolute;
+				inset: -45% -35% auto auto;
+				z-index: 0;
+				width: 75%;
+				height: 75%;
+				background: radial-gradient(circle, rgba(97, 242, 255, 0.16), transparent 65%);
+				content: "";
+				opacity: 0.45;
+				pointer-events: none;
+				transition: opacity 200ms ease;
+			}
+
+			.project-card:hover::after,
+			.project-card:focus-within::after {
+				opacity: 1;
+			}
+
+			.project-card > * {
+				position: relative;
+				z-index: 1;
 			}
 
 			.project-card-header {
@@ -402,7 +425,7 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 
 			.project-card-link {
 				display: block;
-				color: var(--paper-ink);
+				color: var(--ink);
 			}
 
 			.project-card-link:hover,
@@ -418,21 +441,21 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 			.project-card h3 {
 				margin: 0;
 				font-family: "Fraunces", Georgia, serif;
-				font-size: 1.8rem;
-				font-weight: 700;
-				letter-spacing: 0;
+				font-size: 1.75rem;
+				font-weight: 800;
+				letter-spacing: -0.01em;
 				line-height: 1.08;
 			}
 
 			.project-card p {
-				margin: 1.2rem 0 0;
-				color: var(--paper-muted);
+				margin: 1.1rem 0 0;
+				color: var(--ink-muted);
 				font-size: 1rem;
 				line-height: 1.62;
 			}
 
 			.project-number {
-				color: #58706e;
+				color: var(--ink-soft);
 				font-family: "IBM Plex Mono", monospace;
 				font-size: 0.82rem;
 				font-weight: 600;
@@ -441,30 +464,27 @@ const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
 			.project-tags {
 				display: flex;
 				flex-wrap: wrap;
-				gap: 0.5rem;
+				gap: 0.45rem;
 				list-style: none;
-				margin: 1.25rem 0 0;
+				margin: 1.3rem 0 0;
 				padding: 0;
 			}
 
 			.project-tags li {
-				border: 1px solid rgba(24, 32, 38, 0.16);
-				border-radius: var(--radius);
-				background: rgba(255, 255, 255, 0.42);
-				color: #31423f;
+				border: 1px solid rgba(112, 255, 158, 0.24);
+				border-radius: 999px;
+				background: rgba(112, 255, 158, 0.05);
+				color: var(--ink-muted);
 				font-family: "IBM Plex Mono", monospace;
-				font-size: 0.78rem;
-				padding: 0.38rem 0.55rem;
+				font-size: 0.72rem;
+				letter-spacing: 0.02em;
+				line-height: 1;
+				padding: 0.4rem 0.72rem;
+				white-space: nowrap;
 			}
 
 			.detail-tags {
 				margin-top: 2rem;
-			}
-
-			.project-detail .project-tags li {
-				border-color: var(--line);
-				background: rgba(255, 255, 255, 0.06);
-				color: var(--ink-muted);
 			}
 
 			.link-row {
