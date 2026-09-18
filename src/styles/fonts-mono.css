@@ -1,0 +1,16 @@
+/*
+ * Monaspace Radon, imported only by the demo components, so the 18 KB lands on
+ * the two project pages that actually contain a terminal and nowhere else.
+ *
+ * Renamed from "Monaspace Radon": OFL 1.1 clause 3 forbids a Modified Version
+ * from carrying the Reserved Font Name, and subsetting makes this a modified
+ * version. See public/fonts/Monaspace-OFL.txt for the notice and licence.
+ */
+
+@font-face {
+	font-family: "Radon Terminal";
+	src: url("/fonts/radon-mono.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}

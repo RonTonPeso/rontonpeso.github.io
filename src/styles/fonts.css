@@ -1,0 +1,64 @@
+/*
+ * Self-hosted faces. Built by scripts/build-fonts.py from upstream sources;
+ * licences ride along in public/fonts/*-OFL.txt. All three are SIL OFL 1.1.
+ *
+ * Fraunces keeps its opsz axis live (9-144), so the hero and a project row
+ * title get genuinely different letterforms rather than the same outlines
+ * scaled. wght, SOFT and WONK are pinned, which is why this is one file.
+ */
+
+@font-face {
+	font-family: "Fraunces Display";
+	src: url("/fonts/fraunces-display.woff2") format("woff2-variations");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Karrik";
+	src: url("/fonts/karrik-regular.woff2") format("woff2");
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Karrik";
+	src: url("/fonts/karrik-italic.woff2") format("woff2");
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+
+/*
+ * Size-adjusted fallbacks. The overrides are derived from each face's real
+ * metrics against Arial's (upm 2048, asc 1854, desc 434, gap 67, avg 904),
+ * so the swap from fallback to webfont does not move any text. Recompute
+ * these if a face is ever replaced; the numbers are not decorative.
+ */
+@font-face {
+	font-family: "Fraunces Fallback";
+	src: local("Georgia"), local("Times New Roman");
+	size-adjust: 139.78%;
+	ascent-override: 69.97%;
+	descent-override: 18.24%;
+	line-gap-override: 0%;
+}
+
+@font-face {
+	font-family: "Karrik Fallback";
+	src: local("Helvetica Neue"), local("Arial");
+	size-adjust: 130.27%;
+	ascent-override: 57.57%;
+	descent-override: 19.19%;
+	line-gap-override: 7.68%;
+}
+
+:root {
+	--font-display: "Fraunces Display", "Fraunces Fallback", Georgia, serif;
+	--font-body: "Karrik", "Karrik Fallback", "Helvetica Neue", Arial, sans-serif;
+	/* Only the two demo pages load the mono face; everywhere else this is a
+	   plain system stack, which is all a stray <code> needs. */
+	--font-mono: "Radon Terminal", ui-monospace, SFMono-Regular, Menlo, monospace;
+}

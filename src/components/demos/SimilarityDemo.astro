@@ -1,6 +1,7 @@
 ---
 // "Audio twin finder" — a self-contained mini of Hit Forensics' Q6 k-NN audio similarity.
 // Computes nearest neighbors in 5-D audio-feature space, client-side, over a small sample.
+import "../../styles/fonts-mono.css";
 ---
 
 <section class="demo-panel" aria-labelledby="sim-demo-title">
@@ -171,7 +172,6 @@
 
 	.sim-label {
 		color: var(--ink-soft);
-		font-family: "IBM Plex Mono", monospace;
 		font-size: 0.72rem;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
@@ -185,7 +185,6 @@
 		border-radius: 9px;
 		background: rgba(4, 12, 20, 0.8);
 		color: var(--ink);
-		font-family: "IBM Plex Mono", monospace;
 		font-size: 0.86rem;
 	}
 
@@ -214,14 +213,13 @@
 		gap: 0.5rem;
 		margin: 0 0 1rem;
 		color: var(--ink);
-		font-family: "Fraunces", Georgia, serif;
+		font-family: var(--font-display);
 		font-size: 1.15rem;
 		font-weight: 700;
 	}
 
 	.sim-knn {
 		color: var(--ink-soft);
-		font-family: "IBM Plex Mono", monospace;
 		font-size: 0.68rem;
 		font-weight: 400;
 		letter-spacing: 0.06em;
@@ -239,7 +237,6 @@
 
 	.sim-bar-label {
 		color: var(--ink-muted);
-		font-family: "IBM Plex Mono", monospace;
 		font-size: 0.72rem;
 	}
 
@@ -260,8 +257,9 @@
 	}
 
 	.sim-bar-val {
+		font-variant-numeric: tabular-nums;
 		color: var(--ink-soft);
-		font-family: "IBM Plex Mono", monospace;
+		font-family: var(--font-mono);
 		font-size: 0.72rem;
 		text-align: right;
 	}
@@ -325,8 +323,9 @@
 	}
 
 	.sim-twin-pct {
+		font-variant-numeric: tabular-nums;
 		color: var(--green);
-		font-family: "IBM Plex Mono", monospace;
+		font-family: var(--font-mono);
 		font-size: 0.8rem;
 		font-weight: 600;
 		text-align: right;

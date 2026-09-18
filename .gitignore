@@ -30,3 +30,6 @@ frontend-design/
 agents.md
 claude.md
 roadmap.md
+
+# python venv for scripts/build-fonts.py
+.venv/
