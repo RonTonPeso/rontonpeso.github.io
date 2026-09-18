@@ -33,4 +33,11 @@
 	--radius-edge: 4px;
 
 	--page: 1120px;
+
+	/* Motion. Entrances decelerate, exits accelerate; state changes are fast
+	   enough not to be noticed, layout changes slow enough to be followed. */
+	--ease-out: cubic-bezier(0.22, 0.75, 0.3, 1);
+	--ease-in: cubic-bezier(0.7, 0, 0.84, 0.3);
+	--dur-state: 140ms;
+	--dur-layout: 260ms;
 }

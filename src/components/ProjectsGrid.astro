@@ -9,8 +9,8 @@ const { projects = defaultProjects, heading = "Projects" } = Astro.props;
 	<h2 id="projects-heading" class="section-heading">{heading}</h2>
 	<div class="project-rows">
 		{
-			projects.map((project, index) => (
-				<article class="project-row" data-reveal style={`--card-index: ${index}`}>
+			projects.map((project) => (
+				<article class="project-row">
 					{project.logo ? (
 						<img class="row-logo" src={`${basePath}${project.logo}`} alt={`${project.title} logo`} />
 					) : (
