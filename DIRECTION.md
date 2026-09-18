@@ -66,15 +66,24 @@ color coding exactly one category.
 
 **The trace.**
 
-One green line is the only accent on the site, and it does four jobs:
+One green line is the only accent on the site. It marks the live edge of the page, and nothing
+else. In practice that is:
 
-1. At the top of the home page it is the aurora, drawn once, as a curve.
-2. Between project rows it is the hairline rule.
-3. Under a link it is the underline.
-4. In the terminal demo it is the cursor.
+1. The aurora at the top of the home page, drawn once.
+2. The underline: under a link, under the current nav item, under the scroll cue.
+3. The focus ring, and the text selection.
+4. The caret and the terminal cursor.
+5. The one primary action (Email) and the one live indicator (the availability dot).
 
-Nothing else is green. Everything else is an off-black ground and neutrals tinted toward the same
-hue. If a green thing cannot be explained as one of those four jobs, it is deleted.
+Nothing else is green. Labels are not green. Project kinds are not green. Headings are not green.
+Everything else is an off-black ground and neutrals tinted toward the same hue. If a green thing
+cannot be named in that list, it is deleted.
+
+Items 1 to 4 were the original rule. Item 5 is an honest amendment made during implementation:
+a solid accent call-to-action and a status dot are both legitimate, and an accurate rule is worth
+more than a tidy one that the code quietly breaks. Four things did quietly break it and were
+fixed: the project-kind labels, the page kickers, the about-page definition terms, and the
+decorative letter-in-a-box that stood in for a missing project logo.
 
 This single rule settles the palette, the hover states, the focus ring and the section dividers at
 once, and it is why the six accents can go without leaving a hole. The aurora is not removed from

@@ -132,7 +132,7 @@ const personLd = {
 			:focus-visible {
 				outline: 2px solid var(--accent);
 				outline-offset: 3px;
-				border-radius: 1px;
+				border-radius: var(--radius-edge);
 			}
 
 			::selection {
@@ -199,7 +199,7 @@ const personLd = {
 			}
 
 			.nav-links a[aria-current="page"] {
-				color: var(--accent);
+				color: var(--ink);
 			}
 
 			.nav-links a[aria-current="page"]::after {
@@ -208,14 +208,13 @@ const personLd = {
 				bottom: -0.5rem;
 				left: 0;
 				height: 2px;
-				border-radius: 2px;
+				border-radius: var(--radius-edge);
 				background: var(--accent);
 				content: "";
 			}
 
-			.nav-links a:hover,
-			.nav-links a:focus-visible {
-				color: var(--accent);
+			.nav-links a:hover {
+				color: var(--ink);
 			}
 
 			main {
@@ -228,9 +227,15 @@ const personLd = {
 			.page-section {
 				position: relative;
 				isolation: isolate;
-				width: min(var(--page), calc(100% - 2rem));
+				width: min(var(--page), calc(100% - var(--gutter) * 2));
 				margin: 0 auto;
-				padding: var(--s9) 0;
+				padding: var(--rhythm-section) 0;
+			}
+
+			/* A chapter break: the gap between the hero and the work below it is
+			   larger than the gap between anything inside a section. */
+			.hero + .page-section {
+				padding-top: var(--rhythm-chapter);
 			}
 
 
@@ -239,10 +244,13 @@ const personLd = {
 				isolation: isolate;
 				display: grid;
 				align-content: center;
-				width: min(var(--page), calc(100% - 2rem));
-				min-height: calc(100vh - 68px);
+				width: min(var(--page), calc(100% - var(--gutter) * 2));
+				/* svh, not vh: mobile browser chrome should not push the scroll
+				   cue off screen. The old calc(100vh - 68px) subtracted the height
+				   of a nav that is position:absolute and out of flow. */
+				min-height: 100svh;
 				margin: 0 auto;
-				padding: var(--s9) 0 var(--s10);
+				padding: var(--rhythm-chapter) 0 var(--rhythm-section);
 			}
 
 
@@ -395,16 +403,7 @@ const personLd = {
 				position: relative;
 				width: 58px;
 				height: 1px;
-				background: var(--line-strong);
-				overflow: hidden;
-			}
-
-			.scroll-line::after {
-				position: absolute;
-				inset: 0;
-				width: 42%;
 				background: var(--accent);
-				content: "";
 			}
 
 			.text-link {
@@ -423,7 +422,7 @@ const personLd = {
 
 			.kicker {
 				margin: 0 0 var(--s4);
-				color: var(--accent);
+				color: var(--ink-soft);
 				font-size: var(--t-sm);
 				font-weight: 600;
 				letter-spacing: var(--track-label);
@@ -471,13 +470,12 @@ const personLd = {
 			.project-row {
 				position: relative;
 				display: grid;
-				grid-template-columns: 3.4rem minmax(0, 1fr);
+				grid-template-columns: 2.5rem 2.5rem minmax(0, 1fr);
 				gap: var(--s5);
 				align-items: start;
-				padding: var(--s6) var(--s4) var(--s6) var(--s3);
+				padding: var(--s5) 0;
 				border-top: 1px solid var(--line);
 				isolation: isolate;
-				transition: padding-left var(--dur-layout) var(--ease-out);
 			}
 
 			.project-row:last-child {
@@ -500,44 +498,28 @@ const personLd = {
 				opacity: 1;
 			}
 
-			.project-row:hover,
-			.project-row:focus-within {
-				padding-left: var(--s5);
-			}
 
-			/* project logo (filler shows the initial when no image is set) */
+
 			.row-logo {
-				display: grid;
-				place-items: center;
-				width: 3.4rem;
-				height: 3.4rem;
-				border: 1px solid var(--line-strong);
-				border-radius: 12px;
-				background: var(--ground-lift);
-				color: var(--accent);
-				font-family: var(--font-display);
-				font-size: var(--t-lg);
-				font-weight: 800;
-				line-height: 1;
-				overflow: hidden;
-				transition: border-color var(--dur-state) var(--ease-out);
-			}
-
-			/* keep the logo a fixed square; fit the image inside it */
-			img.row-logo {
-				padding: var(--s1);
+				width: 2.5rem;
+				height: 2.5rem;
+				border-radius: var(--radius-edge);
 				object-fit: contain;
 			}
 
-			.project-row:hover .row-logo,
-			.project-row:focus-within .row-logo {
-				border-color: var(--accent);
+			/* The index hangs into the margin: the only column that is not content. */
+			.row-index {
+				color: var(--ink-soft);
+				font-size: var(--t-sm);
+				font-variant-numeric: tabular-nums;
+				letter-spacing: var(--track-label);
+				line-height: 1.9;
 			}
 
 			.row-kind {
 				display: inline-block;
 				margin: 0 0 var(--s2);
-				color: var(--accent);
+				color: var(--ink-soft);
 				font-size: var(--t-sm);
 				font-weight: 500;
 				letter-spacing: var(--track-label);
@@ -569,7 +551,7 @@ const personLd = {
 				margin-left: var(--s2);
 				/* Fraunces draws no U+2192; Karrik does. Keep the arrow in the body face. */
 				font-family: var(--font-body);
-				color: var(--accent);
+				color: currentColor;
 				font-size: 0.6em;
 				opacity: 0;
 				transform: translate(-5px, 5px);
@@ -609,15 +591,18 @@ const personLd = {
 			}
 
 			.project-tags li {
-				border: 1px solid var(--line);
-				border-radius: 999px;
-				background: transparent;
-				color: var(--ink-muted);
-				font-size: var(--t-xs);
-				letter-spacing: 0.02em;
+				color: var(--ink-soft);
+				font-size: var(--t-sm);
+				letter-spacing: var(--track-label);
 				line-height: 1;
-				padding: var(--s2) var(--s3);
-				white-space: nowrap;
+				text-transform: uppercase;
+			}
+
+			/* A middot between tags reads as a list without drawing six boxes. */
+			.project-tags li + li::before {
+				margin-right: var(--s2);
+				color: var(--line-strong);
+				content: "·";
 			}
 
 			.detail-tags {
@@ -640,7 +625,7 @@ const personLd = {
 			.back-link {
 				display: inline-block;
 				margin-bottom: var(--s6);
-				color: var(--accent);
+				color: var(--ink-muted);
 				font-size: var(--t-sm);
 				font-weight: 700;
 			}
@@ -659,7 +644,7 @@ const personLd = {
 			}
 
 			.project-detail {
-				min-height: calc(100vh - 58px);
+				min-height: auto;
 			}
 
 			.detail-header {
@@ -700,7 +685,7 @@ const personLd = {
 			}
 
 			.text-page {
-				min-height: calc(100vh - 58px);
+				min-height: auto;
 			}
 
 			.about-layout {
@@ -753,7 +738,7 @@ const personLd = {
 			}
 
 			.about-facts dt {
-				color: var(--accent);
+				color: var(--ink-soft);
 				font-size: var(--t-xs);
 				letter-spacing: var(--track-label);
 				text-transform: uppercase;
@@ -782,13 +767,19 @@ const personLd = {
 			}
 
 			.footer-line a {
-				color: var(--accent);
+				color: var(--ink-muted);
 				transition: color var(--dur-state) var(--ease-out);
+			}
+
+			.footer-line a {
+				text-decoration: underline;
+				text-decoration-color: var(--accent);
+				text-underline-offset: 0.3em;
 			}
 
 			.footer-line a:hover,
 			.footer-line a:focus-visible {
-				color: var(--accent);
+				color: var(--ink);
 			}
 
 
@@ -871,8 +862,7 @@ const personLd = {
 				}
 
 				.hero {
-					min-height: calc(100vh - 58px);
-					padding: var(--s8) 0 var(--s9);
+					padding: var(--rhythm-section) 0;
 				}
 
 				.hero-scroll {
@@ -911,13 +901,6 @@ const personLd = {
 				.project-row:hover,
 				.project-row:focus-within {
 					padding-left: var(--s4);
-				}
-
-				.row-logo {
-					width: 2.6rem;
-					height: 2.6rem;
-					font-size: var(--t-md);
-					border-radius: 10px;
 				}
 
 				.row-title {
