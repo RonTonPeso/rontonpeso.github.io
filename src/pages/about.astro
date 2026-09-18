@@ -6,50 +6,51 @@ const aboutPhoto = `${basePath}delta_ronnie_wang_copy.jpg`;
 ---
 
 <BaseLayout
-	title="About | Ronnie Wang"
-	description="About Ronald Ronnie Wang, a student in Penn Engineering interested in materials science, computer science, sustainability, and culture."
+	title="About Ronnie Wang"
+	description="Ronnie Wang studies computer science at Penn and does bioinformatics research in the Cheng Lab. Short page, longer project write-ups."
 >
 	<section class="page-section text-page">
-		<p class="kicker">About the engineer</p>
 		<h1 class="page-title">About</h1>
 		<div class="about-layout">
 			<div class="about-side">
 				<figure class="about-photo">
 					<img
 						src={aboutPhoto}
-						alt="Ronnie Wang sitting near large green plants by a window"
+						alt="Ronnie Wang seated by a window, with large houseplants behind him"
+						width="800"
+						height="1000"
 					/>
-					<figcaption>Ronnie Wang</figcaption>
+					<figcaption>Philadelphia, 2025.</figcaption>
 				</figure>
 				<dl class="about-facts">
 					<div>
 						<dt>Studying</dt>
-						<dd>Computer Science, BSE + Masters, Penn Engineering</dd>
+						<dd>Computer science, BSE and Masters, Penn Engineering</dd>
 					</div>
 					<div>
 						<dt>Research</dt>
-						<dd>Cheng Lab · bioinformatics research</dd>
+						<dd>Cheng Lab, bioinformatics</dd>
 					</div>
 					<div>
-						<dt>Currently Building</dt>
-						<dd>Dynamic Interfaces</dd>
+						<dt>Building</dt>
+						<dd>Dynamic interfaces</dd>
 					</div>
 				</dl>
 			</div>
-			<div>
+			<div class="about-body">
 				<div class="prose">
 					<p>
-						Hello hello! I'm a student in the School of Engineering and
-						Applied Science pursuing a major and masters degree in computer science.
-						
-					</p>
-					<p>
-						
+						I study computer science at Penn, BSE and Masters, and my research is on
+						the bioinformatics side of the Cheng Lab. Most of what is on this site
+						started as a question I could not answer by reading about it: how a
+						scheduler decides who runs next, what a feature flag service has to
+						guarantee, whether a hardness model can tell you when to stop trusting
+						it. The write-ups are longer than this page on purpose.
 					</p>
 				</div>
 				<div class="link-row" aria-label="Contact links">
-					<a href="mailto:wronnie@seas.upenn.edu">Email</a>
-					<a href="https://github.com/RonTonPeso">GitHub</a>
+					<a class="text-link" href="mailto:wronnie@seas.upenn.edu">Email me</a>
+					<a class="text-link" href="https://github.com/RonTonPeso">GitHub</a>
 				</div>
 			</div>
 		</div>

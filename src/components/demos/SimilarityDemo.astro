@@ -1,17 +1,17 @@
 ---
-// "Audio twin finder" — a self-contained mini of Hit Forensics' Q6 k-NN audio similarity.
+// "Audio twin finder": a small client-side version of the project’s k-NN audio-similarity query.
 // Computes nearest neighbors in 5-D audio-feature space, client-side, over a small sample.
 import "../../styles/fonts-mono.css";
 ---
 
 <section class="demo-panel" aria-labelledby="sim-demo-title">
 	<div class="demo-heading">
-		<p class="demo-eyebrow">Interactive artifact</p>
 		<h2 id="sim-demo-title" class="demo-h2">Audio twin finder</h2>
 		<p class="demo-note">
-			Pick a song and the demo finds its closest "audio twins" by measuring distance across five
-			audio features, the same k-nearest-neighbor idea the app runs across 447k tracks with a
-			GiST-indexed <code>cube</code>. <em>Illustrative 20-track sample; feature values are approximate.</em>
+			Pick a song. The demo ranks its nearest neighbours by straight-line distance across five
+			audio features, which is the same idea the real query runs across 447,000 tracks using a
+			GiST-indexed <code>cube</code>. <em>Twenty tracks here, and the feature values are
+			approximations, so treat the percentages as illustrative.</em>
 		</p>
 	</div>
 
@@ -39,7 +39,7 @@ import "../../styles/fonts-mono.css";
 		const root = document.querySelector("[data-sim]");
 		if (!root) return;
 
-		// [danceability, energy, valence, acousticness, instrumentalness] — approximate, illustrative
+		// [danceability, energy, valence, acousticness, instrumentalness], approximate
 		const FEATURES = [
 			{ key: "dnc", label: "Danceability" },
 			{ key: "nrg", label: "Energy" },
@@ -78,7 +78,7 @@ import "../../styles/fonts-mono.css";
 		TRACKS.forEach((t, i) => {
 			const opt = document.createElement("option");
 			opt.value = String(i);
-			opt.textContent = `${t.name} — ${t.artist}`;
+			opt.textContent = `${t.name}, ${t.artist}`;
 			seedSel.appendChild(opt);
 		});
 

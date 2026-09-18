@@ -4,7 +4,7 @@ import "../styles/tokens.css";
 import "../styles/fonts.css";
 const {
 	title = "Ronnie Wang",
-	description = "Ronnie Wang is a software engineer and University of Pennsylvania computer science student, passionate about AI."
+	description = "Ronnie Wang, software engineer. Computer science at Penn, bioinformatics research in the Cheng Lab."
 } = Astro.props;
 
 const pathname = Astro.url.pathname;
@@ -271,12 +271,18 @@ const personLd = {
 				margin-left: 0.06em;
 			}
 
+			/* Karrik ships one weight, so emphasis is italic rather than bold.
+			   Green is not available here: it has four jobs and this is not one. */
 			.hero-blurb .hl-ai {
-				color: var(--accent);
+				font-style: italic;
 			}
 
+			/* DIRECTION.md section 4: the one deliberate break. Everything on this
+			   site hangs off the same left edge except the least serious word on it. */
 			.hero-blurb .hl-peng {
-				color: var(--accent);
+				display: block;
+				margin-left: -0.68em;
+				font-style: italic;
 			}
 
 			.hero-meta {
@@ -399,6 +405,20 @@ const personLd = {
 				width: 42%;
 				background: var(--accent);
 				content: "";
+			}
+
+			.text-link {
+				color: var(--ink);
+				text-decoration: underline;
+				text-decoration-color: var(--accent);
+				text-decoration-thickness: 1px;
+				text-underline-offset: 0.3em;
+				transition: color var(--dur-state) var(--ease-out);
+			}
+
+			.text-link:hover,
+			.text-link:focus-visible {
+				color: var(--accent);
 			}
 
 			.kicker {
@@ -661,7 +681,7 @@ const personLd = {
 				padding-left: var(--s4);
 			}
 
-			.detail-aside p {
+			.aside-title {
 				letter-spacing: var(--track-label);
 				margin: 0 0 var(--s3);
 				color: var(--ink-soft);
@@ -945,7 +965,7 @@ const personLd = {
 		</main>
 		<footer class="site-footer">
 			<p class="footer-line">
-				© 2026 Ronnie Wang · <a href="mailto:wronnie@seas.upenn.edu">wronnie@seas.upenn.edu</a>
+				© {new Date().getFullYear()} Ronnie Wang · <a href="mailto:wronnie@seas.upenn.edu">wronnie@seas.upenn.edu</a>
 			</p>
 		</footer>
 	</body>

@@ -1,12 +1,10 @@
 ---
-// Interactive mock of the PennOS shell. Self-contained: markup + inline logic + styles.
-// Adapted from the original PennOS terminal demo, restyled for the aurora theme.
+// Interactive mock of the PennOS shell. Self-contained: markup, inline logic, styles.
 import "../../styles/fonts-mono.css";
 ---
 
 <section class="demo-panel" aria-labelledby="pennos-demo-title">
 	<div class="demo-heading">
-		<p class="demo-eyebrow">Interactive artifact</p>
 		<h2 id="pennos-demo-title" class="demo-h2">PennOS shell</h2>
 		<p class="demo-note">
 			A browser mock of the shell. Try <code>help</code>, <code>ls</code>, <code>cat notes.txt</code>,
@@ -19,7 +17,7 @@ import "../../styles/fonts-mono.css";
 			<span class="terminal-dot dot-a"></span>
 			<span class="terminal-dot dot-b"></span>
 			<span class="terminal-dot dot-c"></span>
-			<span class="terminal-bar-title">pennos — shell</span>
+			<span class="terminal-bar-title">pennos: shell</span>
 		</div>
 		<div class="terminal-window" data-terminal-window>
 			<div class="terminal-output" data-terminal-output>
@@ -290,15 +288,6 @@ import "../../styles/fonts-mono.css";
 
 	.demo-heading {
 		margin-bottom: var(--s4);
-	}
-
-	.demo-eyebrow {
-		margin: 0 0 var(--s2);
-		color: var(--cyan);
-		font-size: var(--t-sm);
-		font-weight: 500;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
 	}
 
 	.demo-h2 {
