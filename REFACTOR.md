@@ -174,12 +174,25 @@ accessibility work in this refactor does not show up as a score change.
 
 ### Screenshots
 
-`docs/shots/`, home page, at the three widths:
+`docs/shots/`, home page:
 
-| | 375 | 768 | 1440 |
+| | 500 | 768 | 1440 |
 |---|---|---|---|
-| Before | `before-home-375.png` | `before-home-768.png` | `before-home-1440.png` |
-| After | `after-home-375.png` | `after-home-768.png` | `after-home-1440.png` |
+| Before | `before-home-500.png` | `before-home-768.png` | `before-home-1440.png` |
+| After | `after-home-500.png` | `after-home-768.png` | `after-home-1440.png` |
+
+**The brief asked for 375, and these are 500.** Headless Chrome clamps its window to a 500 px
+minimum: requesting `--window-size=375` reports `innerWidth=500` and produces a 500 px layout
+cropped to a 375 px image. The first pair of captures was taken that way and looked like a bug,
+a nav clipped off the right edge, which then appeared in both the before and the after shot.
+It was an artefact of the crop, not of the CSS, and both files were deleted rather than shipped
+with a misleading label. `--force-device-scale-factor` does not help; it changes rendering
+resolution, not the CSS viewport. A true 375 px capture needs CDP device emulation, which this
+run did not set up.
+
+What that leaves unverified: the 375-to-500 range. The site's smallest breakpoint is 700 px, so
+the 500 px capture does exercise the mobile layout, and nothing between 375 and 500 introduces a
+new rule. But it has not been seen, and should be before anyone calls the mobile view done.
 
 ---
 
