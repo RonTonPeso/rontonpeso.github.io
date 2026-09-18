@@ -59,6 +59,6 @@
 	--font-display: "Fraunces Display", "Fraunces Fallback", Georgia, serif;
 	--font-body: "Karrik", "Karrik Fallback", "Helvetica Neue", Arial, sans-serif;
 	/* Only the two demo pages load the mono face; everywhere else this is a
-	   plain system stack, which is all a stray <code> needs. */
+	plain system stack, which is all a stray <code> needs. */
 	--font-mono: "Radon Terminal", ui-monospace, SFMono-Regular, Menlo, monospace;
 }

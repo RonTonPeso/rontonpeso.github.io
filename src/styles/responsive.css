@@ -1,10 +1,10 @@
 /* Breakpoints, print, and reduced motion. Imported last: these override. */
 
 @media (max-width: 920px) {
-.hero h1,
-.page-title {
-	font-size: var(--t-4xl);
-}
+	.hero h1,
+	.page-title {
+		font-size: var(--t-4xl);
+	}
 
 .section-heading {
 	font-size: var(--t-3xl);
@@ -21,13 +21,13 @@
 	border-top: 1px solid var(--line);
 	padding: var(--s4) 0 0;
 }
-			}
+}
 
 @media (max-width: 700px) {
-.site-nav {
-	align-items: center;
-	padding: var(--s3) var(--s4);
-}
+	.site-nav {
+		align-items: center;
+		padding: var(--s3) var(--s4);
+	}
 
 .site-name span {
 	display: none;
@@ -70,7 +70,6 @@
 }
 
 .project-row {
-	grid-template-columns: 2.6rem minmax(0, 1fr);
 	gap: var(--s4);
 	padding: var(--s6) var(--s2);
 }
@@ -83,20 +82,20 @@
 .row-title {
 	font-size: var(--t-xl);
 }
-			}
+}
 
 @media print {
-/* Paper is not a polar night. Ink on white, no aurora, and the
-   URLs behind links printed out since they cannot be clicked. */
-:root {
-	--ground: #fff;
-	--ink: #111;
-	--ink-muted: #222;
-	--ink-soft: #444;
-	--line: #ccc;
-	--line-strong: #999;
-	--accent: #111;
-}
+	/* Paper is not a polar night. Ink on white, no aurora, and the
+	URLs behind links printed out since they cannot be clicked. */
+	:root {
+		--ground: #fff;
+		--ink: #111;
+		--ink-muted: #222;
+		--ink-soft: #444;
+		--line: #ccc;
+		--line-strong: #999;
+		--accent: #111;
+	}
 
 body[data-route="home"]::before,
 .site-nav,
@@ -117,19 +116,19 @@ a[href^="http"]::after {
 	font-size: var(--t-xs);
 	word-break: break-all;
 }
-			}
+}
 
 @media (prefers-reduced-motion: reduce) {
-/* A genuine no-motion path, not a 1ms duration. Nothing moves;
-   hover and focus still change colour, so states stay legible. */
-*,
-*::before,
-*::after {
-	animation: none !important;
-	transition: none !important;
-}
+	/* A genuine no-motion path, not a 1ms duration. Nothing moves;
+	hover and focus still change colour, so states stay legible. */
+	 *,
+	 *::before,
+	 *::after {
+		animation: none !important;
+		transition: none !important;
+	}
 
 html {
 	scroll-behavior: auto;
 }
-			}
+}

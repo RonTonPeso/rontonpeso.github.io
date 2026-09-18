@@ -24,6 +24,7 @@ const RowHeading = level === "h1" ? "h2" : "h3";
 					<span class="row-index" aria-hidden="true">
 						{String(index + 1).padStart(2, "0")}
 					</span>
+					<div class="row-body">
 					{project.logo && (
 						<img
 							class="row-logo"
@@ -34,7 +35,6 @@ const RowHeading = level === "h1" ? "h2" : "h3";
 							loading="lazy"
 						/>
 					)}
-					<div class="row-body">
 						{project.kind && <span class="row-kind">{project.kind}</span>}
 						<RowHeading class="row-title">
 							<a class="row-link" href={`${basePath}projects/${project.slug}`}>

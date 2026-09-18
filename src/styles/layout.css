@@ -1,180 +1,180 @@
 /* Page structure: the column, the three rhythms, and the grids. */
 
-			.error-page .link-row {
-gap: var(--s5);
-			}
+.error-page .link-row {
+	gap: var(--s5);
+}
 
-			.page-section {
-position: relative;
-isolation: isolate;
-width: min(var(--page), calc(100% - var(--gutter) * 2));
-margin: 0 auto;
-padding: var(--rhythm-section) 0;
-			}
+.page-section {
+	position: relative;
+	isolation: isolate;
+	width: min(var(--page), calc(100% - var(--gutter) * 2));
+	margin: 0 auto;
+	padding: var(--rhythm-section) 0;
+}
 
-			/* A chapter break: the gap between the hero and the work below it is
-			   larger than the gap between anything inside a section. */
-			.hero + .page-section {
-padding-top: var(--rhythm-chapter);
-			}
+/* A chapter break: the gap between the hero and the work below it is
+larger than the gap between anything inside a section. */
+.hero + .page-section {
+	padding-top: var(--rhythm-chapter);
+}
 
-			.hero {
-position: relative;
-isolation: isolate;
-display: grid;
-align-content: center;
-width: min(var(--page), calc(100% - var(--gutter) * 2));
-/* svh, not vh: mobile browser chrome should not push the scroll
-   cue off screen. The old calc(100vh - 68px) subtracted the height
-   of a nav that is position:absolute and out of flow. */
-min-height: 100svh;
-margin: 0 auto;
-padding: var(--rhythm-chapter) 0 var(--rhythm-section);
-			}
+.hero {
+	position: relative;
+	isolation: isolate;
+	display: grid;
+	align-content: center;
+	width: min(var(--page), calc(100% - var(--gutter) * 2));
+	/* svh, not vh: mobile browser chrome should not push the scroll
+	cue off screen. The old calc(100vh - 68px) subtracted the height
+	of a nav that is position:absolute and out of flow. */
+	min-height: 100svh;
+	margin: 0 auto;
+	padding: var(--rhythm-chapter) 0 var(--rhythm-section);
+}
 
-			.hero-content {
-position: relative;
-z-index: 1;
-max-width: 880px;
-			}
+.hero-content {
+	position: relative;
+	z-index: 1;
+	max-width: 880px;
+}
 
-			.hero h1.hero-name {
-font-size: clamp(var(--t-4xl), 13vw, 9.313rem);
-line-height: 0.92;
-letter-spacing: -0.045em;
-			}
+.hero h1.hero-name {
+	font-size: clamp(var(--t-4xl), 13vw, 9.313rem);
+	line-height: 0.92;
+	letter-spacing: -0.045em;
+}
 
-			.hero-line {
-display: block;
-			}
+.hero-line {
+	display: block;
+}
 
-			.hero-line:nth-child(2) {
-margin-left: 0.06em;
-			}
+.hero-line:nth-child(2) {
+	margin-left: 0.06em;
+}
 
-			/* Karrik ships one weight, so emphasis is italic rather than bold.
-			   Green is not available here: it has four jobs and this is not one. */
-			.hero-blurb .hl-ai {
-font-style: italic;
-			}
+/* Karrik ships one weight, so emphasis is italic rather than bold.
+Green is not available here: it has four jobs and this is not one. */
+.hero-blurb .hl-ai {
+	font-style: italic;
+}
 
-			/* DIRECTION.md section 4: the one deliberate break. Everything on this
-			   site hangs off the same left edge except the least serious word on it. */
-			.hero-blurb .hl-peng {
-display: block;
-margin-left: -0.68em;
-font-style: italic;
-			}
+/* DIRECTION.md section 4: the one deliberate break. Everything on this
+site hangs off the same left edge except the least serious word on it. */
+.hero-blurb .hl-peng {
+	display: block;
+	margin-left: -0.68em;
+	font-style: italic;
+}
 
-			.hero-meta {
-display: flex;
-flex-wrap: wrap;
-align-items: center;
-gap: var(--s4);
-margin-top: var(--s6);
-color: var(--ink-soft);
-font-size: var(--t-sm);
-letter-spacing: var(--track-label);
-text-transform: uppercase;
-			}
+.hero-meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--s4);
+	margin-top: var(--s6);
+	color: var(--ink-soft);
+	font-size: var(--t-sm);
+	letter-spacing: var(--track-label);
+	text-transform: uppercase;
+}
 
-			.hero-actions {
-display: flex;
-flex-wrap: wrap;
-gap: var(--s4);
-margin-top: var(--s6);
-			}
+.hero-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--s4);
+	margin-top: var(--s6);
+}
 
-			/* animated scroll cue pinned to the bottom of the hero */
-			.hero-scroll {
-position: absolute;
-bottom: 2.2rem;
-left: 0;
-z-index: 1;
-display: inline-flex;
-align-items: center;
-gap: var(--s3);
-color: var(--ink-soft);
-font-size: var(--t-sm);
-letter-spacing: 0.14em;
-text-transform: uppercase;
-transition: color var(--dur-state) var(--ease-out);
-			}
+/* animated scroll cue pinned to the bottom of the hero */
+.hero-scroll {
+	position: absolute;
+	bottom: 2.2rem;
+	left: 0;
+	z-index: 1;
+	display: inline-flex;
+	align-items: center;
+	gap: var(--s3);
+	color: var(--ink-soft);
+	font-size: var(--t-sm);
+	letter-spacing: 0.14em;
+	text-transform: uppercase;
+	transition: color var(--dur-state) var(--ease-out);
+}
 
-			.hero-scroll:hover,
-			.hero-scroll:focus-visible {
-color: var(--accent);
-			}
+.hero-scroll:hover,
+.hero-scroll:focus-visible {
+	color: var(--accent);
+}
 
-			.hero h1,
-			.page-title {
-margin: 0;
-color: var(--ink);
-font-family: var(--font-display);
-font-size: var(--t-5xl);
-font-weight: 900;
-letter-spacing: var(--track-display);
-line-height: var(--lh-display);
-text-wrap: balance;
-			}
+.hero h1,
+.page-title {
+	margin: 0;
+	color: var(--ink);
+	font-family: var(--font-display);
+	font-size: var(--t-5xl);
+	font-weight: 900;
+	letter-spacing: var(--track-display);
+	line-height: var(--lh-display);
+	text-wrap: balance;
+}
 
-			.prose {
-max-width: var(--measure);
-margin-top: var(--s6);
-			}
+.prose {
+	max-width: var(--measure);
+	margin-top: var(--s6);
+}
 
-			.prose p {
-text-wrap: pretty;
-margin: 0 0 var(--s4);
-color: var(--ink-muted);
-font-size: var(--t-base);
-line-height: var(--lh-body);
-			}
+.prose p {
+	text-wrap: pretty;
+	margin: 0 0 var(--s4);
+	color: var(--ink-muted);
+	font-size: var(--t-base);
+	line-height: var(--lh-body);
+}
 
-			.project-detail {
-min-height: auto;
-			}
+.project-detail {
+	min-height: auto;
+}
 
-			.detail-header {
-max-width: 860px;
-			}
+.detail-header {
+	max-width: 860px;
+}
 
-			.detail-body {
-display: grid;
-grid-template-columns: minmax(0, 760px) minmax(12rem, 1fr);
-gap: var(--s7);
-align-items: start;
-margin-top: var(--s7);
-			}
+.detail-body {
+	display: grid;
+	grid-template-columns: minmax(0, 760px) minmax(12rem, 1fr);
+	gap: var(--s7);
+	align-items: start;
+	margin-top: var(--s7);
+}
 
-			.detail-aside {
-position: sticky;
-top: 7rem;
-border-left: 1px solid var(--line);
-padding-left: var(--s4);
-			}
+.detail-aside {
+	position: sticky;
+	top: 7rem;
+	border-left: 1px solid var(--line);
+	padding-left: var(--s4);
+}
 
-			.text-page {
-min-height: auto;
-			}
+.text-page {
+	min-height: auto;
+}
 
-			.about-layout {
-display: grid;
-grid-template-columns: minmax(18rem, 0.8fr) minmax(0, 1.2fr);
-gap: var(--s7);
-align-items: start;
-margin-top: var(--s7);
-			}
+.about-layout {
+	display: grid;
+	grid-template-columns: minmax(18rem, 0.8fr) minmax(0, 1.2fr);
+	gap: var(--s7);
+	align-items: start;
+	margin-top: var(--s7);
+}
 
-			.about-side {
-display: grid;
-gap: var(--s5);
-			}
+.about-side {
+	display: grid;
+	gap: var(--s5);
+}
 
-			.site-footer {
-position: relative;
-z-index: 1;
-margin-top: var(--s9);
-padding: var(--s6) var(--s4) var(--s7);
-text-align: center;
-			}
+.site-footer {
+	position: relative;
+	z-index: 1;
+	margin-top: var(--s9);
+	padding: var(--s6) var(--s4) var(--s7);
+	text-align: center;
+}

@@ -28,7 +28,7 @@
 	--aurora: oklch(0.84 0.185 155 / 0.16);
 
 	/* Two radii, held everywhere. Pills because the buttons are pills; 4px
-	   for anything with a flat edge. Nested radii get reduced, never copied. */
+	for anything with a flat edge. Nested radii get reduced, never copied. */
 	--radius-pill: 999px;
 	--radius-edge: 4px;
 
@@ -37,7 +37,7 @@
 	--gutter: clamp(var(--s4), 4vw, var(--s7));
 
 	/* Type scale, 1.25 from a 1rem base. The site had 23 ad-hoc sizes; these
-	   are the only ones now. Line-height shrinks as size grows. */
+	are the only ones now. Line-height shrinks as size grows. */
 	--t-xs: 0.64rem;
 	--t-sm: 0.8rem;
 	--t-base: 1rem;
@@ -60,7 +60,7 @@
 	--measure: 68ch;
 
 	/* Spacing, derived from the type scale. Everything not on this ladder
-	   was deleted; the site had 28 distinct rem values. */
+	was deleted; the site had 28 distinct rem values. */
 	--s1: 0.25rem;
 	--s2: 0.5rem;
 	--s3: 0.75rem;
@@ -78,7 +78,7 @@
 	--rhythm-chapter: var(--s10);
 
 	/* Motion. Entrances decelerate, exits accelerate; state changes are fast
-	   enough not to be noticed, layout changes slow enough to be followed. */
+	enough not to be noticed, layout changes slow enough to be followed. */
 	--ease-out: cubic-bezier(0.22, 0.75, 0.3, 1);
 	--ease-in: cubic-bezier(0.7, 0, 0.84, 0.3);
 	--dur-state: 140ms;
