@@ -1,12 +1,22 @@
 ---
-import { projects as defaultProjects } from "../data/projects";
+import { projects as defaultProjects, type Project } from "../data/projects";
 import { basePath } from "../lib/paths";
 
-const { projects = defaultProjects, heading = "Projects" } = Astro.props;
+interface Props {
+	projects?: Project[];
+	heading?: string;
+	/** On /projects this grid is the whole page, so its heading is the h1. */
+	level?: "h1" | "h2";
+}
+
+const { projects = defaultProjects, heading = "Projects", level = "h2" } = Astro.props as Props;
+const Heading = level;
+// Row titles sit one level below the grid heading, whatever that is.
+const RowHeading = level === "h1" ? "h2" : "h3";
 ---
 
 <section id="projects" class="page-section" aria-labelledby="projects-heading">
-	<h2 id="projects-heading" class="section-heading">{heading}</h2>
+	<Heading id="projects-heading" class="section-heading">{heading}</Heading>
 	<div class="project-rows">
 		{
 			projects.map((project, index) => (
@@ -26,12 +36,12 @@ const { projects = defaultProjects, heading = "Projects" } = Astro.props;
 					)}
 					<div class="row-body">
 						{project.kind && <span class="row-kind">{project.kind}</span>}
-						<h3 class="row-title">
+						<RowHeading class="row-title">
 							<a class="row-link" href={`${basePath}projects/${project.slug}`}>
 								{project.title}
 								<span class="row-arrow" aria-hidden="true">&#8594;</span>
 							</a>
-						</h3>
+						</RowHeading>
 						<p class="row-desc">{project.description}</p>
 						<ul class="project-tags" aria-label={`${project.title} technologies`}>
 							{project.tags.map((tag) => (
