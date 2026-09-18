@@ -195,25 +195,24 @@ accessibility work in this refactor does not show up as a score change.
 
 ### Screenshots
 
-`docs/shots/`, home page:
+`docs/shots/`, home page, full-page captures at three real viewport widths:
 
-| | 500 | 768 | 1440 |
+| | 375 | 768 | 1440 |
 |---|---|---|---|
-| Before | `before-home-500.png` | `before-home-768.png` | `before-home-1440.png` |
-| After | `after-home-500.png` | `after-home-768.png` | `after-home-1440.png` |
+| Before | `before-home-375.png` | `before-home-768.png` | `before-home-1440.png` |
+| After | `after-home-375.png` | `after-home-768.png` | `after-home-1440.png` |
 
-**The brief asked for 375, and these are 500.** Headless Chrome clamps its window to a 500 px
-minimum: requesting `--window-size=375` reports `innerWidth=500` and produces a 500 px layout
-cropped to a 375 px image. The first pair of captures was taken that way and looked like a bug,
-a nav clipped off the right edge, which then appeared in both the before and the after shot.
-It was an artefact of the crop, not of the CSS, and both files were deleted rather than shipped
-with a misleading label. `--force-device-scale-factor` does not help; it changes rendering
-resolution, not the CSS viewport. A true 375 px capture needs CDP device emulation, which this
-run did not set up.
+These are genuine 375 px captures. An earlier attempt was not: headless Chrome clamps its window
+to a 500 px minimum, so `--window-size=375` produces a 500 px layout cropped to a 375 px image.
+That crop looked exactly like a clipped nav bar, in both the before and the after shot, which is
+what gave it away. `--force-device-scale-factor` does not help either; it changes rendering
+resolution, not the CSS viewport. These were taken through the DevTools Protocol with
+`Emulation.setDeviceMetricsOverride`, which does set the real thing, and the same harness found
+the defects listed in section 6.
 
-What that leaves unverified: the 375-to-500 range. The site's smallest breakpoint is 700 px, so
-the 500 px capture does exercise the mobile layout, and nothing between 375 and 500 introduces a
-new rule. But it has not been seen, and should be before anyone calls the mobile view done.
+One incidental datum: the before captures are 3.2 to 6.3 MB of PNG against 0.36 to 0.48 MB after,
+at identical dimensions. The starfield and the stacked gradients were noise in the literal sense,
+and noise does not compress.
 
 ---
 
@@ -280,3 +279,47 @@ straight apostrophes, the typo, the empty paragraph, the invented-sounding "Hit 
 and the four generic labels. What remains is that all six `kind` strings share one grammatical shape,
 which is listed above as item 2 of the still-generic list. Rewriting the six project blurbs to vary
 their rhythm would mean rewriting Ronnie's voice, which is the one thing this refactor should not do.
+
+---
+
+## 6. Mobile pass
+
+Run separately, at a true 375 px viewport, after everything above was already committed. Five
+defects, all invisible at 500 px and wider, which is why the earlier passes missed them.
+
+**1. Orphaned CSS was breaking the responsive overrides.** The regex that deleted the `@keyframes`
+blocks was non-greedy and stopped at the first inner brace, leaving 40 lines of keyframe steps
+behind (`to { opacity: 0.95 } }` and similar). The stray braces closed rules early and swallowed
+everything after them, including `.about-layout, .detail-body { grid-template-columns: 1fr }`. On
+a phone every project page therefore kept its two-column desktop grid and rendered the prose at
+103 px wide, roughly one word per line. All seven stylesheets now pass a brace-balance check,
+which is the check that should have existed from the first commit.
+
+**2. The project index broke on any row with a logo.** The grid declared three columns, but a row
+supplies two children without a logo and three with one, so Forest Bush pushed its body into the
+2.5 rem index column. The logo now lives inside the row body and the grid is two columns at every
+width; all six rows share one 271 px measure at 375 px.
+
+**3. The page scrolled sideways by 35 px.** The aurora's `skewX(-7deg)` on a 568 px-tall full-width
+layer pushes it `tan(7°) × height/2` past both edges. `overflow-x: hidden` on `body` never
+propagated to the viewport, and `overflow-x: clip` on `html` did not stop it either, so the cause
+was removed rather than masked: the lean lives in the gradient angle now (93deg to 86deg), and a
+gradient cannot overflow its box.
+
+**4. The home link had no accessible name below 700 px.** `.site-name span { display: none }` hid
+the only text in the anchor and the penguin mark carries `alt=""`, so it announced as nothing.
+Visually hidden instead of removed.
+
+**5. The hero shifted 0.098 on the font swap.** It is bottom-anchored, so a height change moves the
+whole block rather than only what follows it. Karrik sets the blurb and the meta line above the
+fold, so it is preloaded alongside Fraunces. CLS is 0 on both form factors now.
+
+Also fixed while here: the hero centred its content in a `100svh` box, leaving about 400 px of dead
+space between the buttons and the scroll cue on desktop. It is anchored to the baseline of the
+first screen now, which is what the "quiet hero" in DIRECTION.md was reaching for. And a caption I
+had written, "Philadelphia, 2025.", asserted a place and a year I have no source for; the photo
+carries alt text only.
+
+Swept afterwards: six routes × three widths, no horizontal scroll, no collapsed text, no unnamed
+links, correct heading order on all ten built pages. The terminal demo was driven end to end at
+375 px (`help`, `ls`, `ps`) and returns correct output.
