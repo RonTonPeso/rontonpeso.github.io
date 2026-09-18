@@ -155,7 +155,7 @@ import "../../styles/fonts-mono.css";
 
 <style is:global>
 	.similarity-demo {
-		padding: 1.4rem;
+		padding: var(--s5);
 		border: 1px solid var(--line);
 		border-radius: 14px;
 		background: linear-gradient(160deg, rgba(20, 35, 48, 0.6), rgba(8, 15, 25, 0.66));
@@ -166,13 +166,13 @@ import "../../styles/fonts-mono.css";
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: 0.7rem;
-		margin-bottom: 1.3rem;
+		gap: var(--s3);
+		margin-bottom: var(--s5);
 	}
 
 	.sim-label {
 		color: var(--ink-soft);
-		font-size: 0.72rem;
+		font-size: var(--t-xs);
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
 	}
@@ -180,12 +180,12 @@ import "../../styles/fonts-mono.css";
 	.sim-select {
 		flex: 1;
 		min-width: 220px;
-		padding: 0.55rem 0.8rem;
+		padding: var(--s2) var(--s3);
 		border: 1px solid var(--line-strong);
 		border-radius: 9px;
 		background: rgba(4, 12, 20, 0.8);
 		color: var(--ink);
-		font-size: 0.86rem;
+		font-size: var(--t-sm);
 	}
 
 	.sim-select:focus-visible {
@@ -196,11 +196,11 @@ import "../../styles/fonts-mono.css";
 	.sim-grid {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		gap: 1.1rem;
+		gap: var(--s4);
 	}
 
 	.sim-card {
-		padding: 1.1rem 1.2rem;
+		padding: var(--s4) var(--s4);
 		border: 1px solid var(--line);
 		border-radius: 11px;
 		background: rgba(4, 12, 20, 0.45);
@@ -210,17 +210,17 @@ import "../../styles/fonts-mono.css";
 		display: flex;
 		align-items: baseline;
 		justify-content: space-between;
-		gap: 0.5rem;
-		margin: 0 0 1rem;
+		gap: var(--s2);
+		margin: 0 0 var(--s4);
 		color: var(--ink);
 		font-family: var(--font-display);
-		font-size: 1.15rem;
+		font-size: var(--t-md);
 		font-weight: 700;
 	}
 
 	.sim-knn {
 		color: var(--ink-soft);
-		font-size: 0.68rem;
+		font-size: var(--t-xs);
 		font-weight: 400;
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
@@ -231,13 +231,13 @@ import "../../styles/fonts-mono.css";
 		display: grid;
 		grid-template-columns: 7.5rem 1fr 2.4rem;
 		align-items: center;
-		gap: 0.6rem;
-		margin-bottom: 0.7rem;
+		gap: var(--s2);
+		margin-bottom: var(--s3);
 	}
 
 	.sim-bar-label {
 		color: var(--ink-muted);
-		font-size: 0.72rem;
+		font-size: var(--t-xs);
 	}
 
 	.sim-bar-track {
@@ -260,7 +260,7 @@ import "../../styles/fonts-mono.css";
 		font-variant-numeric: tabular-nums;
 		color: var(--ink-soft);
 		font-family: var(--font-mono);
-		font-size: 0.72rem;
+		font-size: var(--t-xs);
 		text-align: right;
 	}
 
@@ -275,8 +275,8 @@ import "../../styles/fonts-mono.css";
 		display: grid;
 		grid-template-columns: 1fr 5rem 2.6rem;
 		align-items: center;
-		gap: 0.7rem;
-		padding: 0.55rem 0;
+		gap: var(--s3);
+		padding: var(--s2) 0;
 		border-top: 1px solid var(--line);
 	}
 
@@ -292,7 +292,7 @@ import "../../styles/fonts-mono.css";
 
 	.sim-twin-name {
 		color: var(--ink);
-		font-size: 0.92rem;
+		font-size: var(--t-base);
 		font-weight: 600;
 		white-space: nowrap;
 		overflow: hidden;
@@ -301,7 +301,7 @@ import "../../styles/fonts-mono.css";
 
 	.sim-twin-artist {
 		color: var(--ink-soft);
-		font-size: 0.76rem;
+		font-size: var(--t-sm);
 		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
@@ -326,7 +326,7 @@ import "../../styles/fonts-mono.css";
 		font-variant-numeric: tabular-nums;
 		color: var(--green);
 		font-family: var(--font-mono);
-		font-size: 0.8rem;
+		font-size: var(--t-sm);
 		font-weight: 600;
 		text-align: right;
 	}

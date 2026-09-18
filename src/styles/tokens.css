@@ -33,6 +33,49 @@
 	--radius-edge: 4px;
 
 	--page: 1120px;
+	/* The page gutter, one value, used by every full-width element. */
+	--gutter: clamp(var(--s4), 4vw, var(--s7));
+
+	/* Type scale, 1.25 from a 1rem base. The site had 23 ad-hoc sizes; these
+	   are the only ones now. Line-height shrinks as size grows. */
+	--t-xs: 0.64rem;
+	--t-sm: 0.8rem;
+	--t-base: 1rem;
+	--t-md: 1.25rem;
+	--t-lg: 1.563rem;
+	--t-xl: 1.953rem;
+	--t-2xl: 2.441rem;
+	--t-3xl: 3.052rem;
+	--t-4xl: 3.815rem;
+	--t-5xl: 4.768rem;
+
+	--lh-display: 1.05;
+	--lh-title: 1.15;
+	--lh-body: 1.6;
+
+	--track-display: -0.025em;
+	--track-label: 0.08em;
+
+	/* Measure: 60-72 characters, enforced in ch so it follows the face. */
+	--measure: 68ch;
+
+	/* Spacing, derived from the type scale. Everything not on this ladder
+	   was deleted; the site had 28 distinct rem values. */
+	--s1: 0.25rem;
+	--s2: 0.5rem;
+	--s3: 0.75rem;
+	--s4: 1rem;
+	--s5: 1.5rem;
+	--s6: 2rem;
+	--s7: 3rem;
+	--s8: 4rem;
+	--s9: 6rem;
+	--s10: 8rem;
+
+	/* Three vertical rhythms that mean different things, not one repeated. */
+	--rhythm-within: var(--s6);
+	--rhythm-section: var(--s8);
+	--rhythm-chapter: var(--s10);
 
 	/* Motion. Entrances decelerate, exits accelerate; state changes are fast
 	   enough not to be noticed, layout changes slow enough to be followed. */
