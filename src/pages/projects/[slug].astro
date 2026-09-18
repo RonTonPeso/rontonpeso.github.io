@@ -2,6 +2,7 @@
 import { projects, type Project } from "../../data/projects";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import DemoRenderer from "../../components/DemoRenderer.astro";
+import { basePath } from "../../lib/paths";
 
 export function getStaticPaths() {
 	return projects.map((project) => ({
@@ -11,9 +12,6 @@ export function getStaticPaths() {
 }
 
 const { project } = Astro.props as { project: Project };
-const basePath = import.meta.env.BASE_URL.endsWith("/")
-	? import.meta.env.BASE_URL
-	: `${import.meta.env.BASE_URL}/`;
 const projectsHref = `${basePath}projects`;
 const slidesHref = project.slidesUrl ? `${basePath}${project.slidesUrl}` : undefined;
 ---

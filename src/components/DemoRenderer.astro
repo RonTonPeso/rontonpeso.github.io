@@ -5,13 +5,15 @@ import SimilarityDemo from "./demos/SimilarityDemo.astro";
 
 // Map a project's `demo` key to its interactive component.
 // Add new demos here as they are built (chess, charts, paint, ...).
-const demoComponents: Record<string, any> = {
+const demoComponents = {
 	terminal: TerminalDemo,
-	similarity: SimilarityDemo,
+	similarity: SimilarityDemo
 };
 
+type DemoKey = keyof typeof demoComponents;
+
 const { project } = Astro.props as { project: Project };
-const ActiveDemo = project.demo ? demoComponents[project.demo] : null;
+const ActiveDemo = project.demo ? demoComponents[project.demo as DemoKey] : undefined;
 ---
 
 {ActiveDemo && <ActiveDemo />}
