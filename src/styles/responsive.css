@@ -30,7 +30,17 @@
 	}
 
 .site-name span {
-	display: none;
+	/* Visually hidden, not display:none: the mark carries no alt text, so
+	   hiding this outright left the home link with no accessible name. */
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	border: 0;
+	clip-path: inset(50%);
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .nav-links {

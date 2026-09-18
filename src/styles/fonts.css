@@ -40,9 +40,9 @@
 @font-face {
 	font-family: "Fraunces Fallback";
 	src: local("Georgia"), local("Times New Roman");
-	size-adjust: 139.78%;
-	ascent-override: 69.97%;
-	descent-override: 18.24%;
+	size-adjust: 140.25%;
+	ascent-override: 69.73%;
+	descent-override: 18.18%;
 	line-gap-override: 0%;
 }
 

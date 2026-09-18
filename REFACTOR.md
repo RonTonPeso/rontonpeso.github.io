@@ -143,6 +143,8 @@ metrics against Arial's, so the swap does not move text.
 
 Lighthouse 12, desktop preset, against `pnpm build` output served locally.
 
+Desktop preset, home page:
+
 | | Before | After |
 |---|---|---|
 | Performance | 96 | **100** |
@@ -152,7 +154,14 @@ Lighthouse 12, desktop preset, against `pnpm build` output served locally.
 | First Contentful Paint | 0.8 s | **0.3 s** |
 | Largest Contentful Paint | 1.2 s | **0.3 s** |
 | Total Blocking Time | 40 ms | **0 ms** |
-| Cumulative Layout Shift | 0 | 0.001 |
+| Cumulative Layout Shift | 0 | **0** |
+
+Mobile emulation, after a second pass that fixed what the first one exposed:
+
+| | Home | /projects/pennos/ |
+|---|---|---|
+| Performance / A11y / Best / SEO | 100 / 100 / 100 / 100 | 100 / 100 / 100 / 100 |
+| Cumulative Layout Shift | 0 | 0 |
 
 | Weight on `/` | Before | After |
 |---|---|---|
@@ -161,11 +170,23 @@ Lighthouse 12, desktop preset, against `pnpm build` output served locally.
 | Fonts | 0 self-hosted (3 CDN families) | 96 KB self-hosted, 0 third-party |
 | Images in `dist` | 4,964 KB | 388 KB |
 
-**Two honest notes on this table.**
+**Notes on this table.**
 
-CLS went from 0 to 0.001. That is a regression, not an improvement, even though it is
-far below the 0.1 threshold. Self-hosting introduces a font swap that the CDN version did not have
-in the same form, and the size-adjusted fallbacks get it close to zero but not to zero.
+The mobile numbers were not free. The first mobile run scored accessibility 95 and CLS 0.098,
+against 100 and 0.001 on desktop, and both were real:
+
+- The home link had no accessible name below 700px. `.site-name span { display: none }` hid the
+  only text in it and the penguin mark carries `alt=""`, so the link announced as nothing. It is
+  visually hidden now instead of removed.
+- The hero shifted 0.098 on the font swap. It is bottom-anchored, so any height change moves the
+  whole block rather than just what follows it. Karrik sets the blurb and the meta line above the
+  fold, so it is preloaded alongside Fraunces. Both pages now measure CLS 0, including desktop,
+  which had been sitting at 0.001.
+
+While checking that, the Fraunces fallback overrides were corrected: they had been derived from
+Arial's metrics while the fallback stack starts with Georgia. The difference is small (Georgia's
+average character width is 901 against Arial's 904, so size-adjust moves from 139.78% to 140.25%)
+but it was measuring the wrong font.
 
 Accessibility scored 100 *before*, while `.hero-meta` was `aria-hidden` and the About page's links
 were visually indistinguishable from body text. Both were real defects. That is a limitation of
