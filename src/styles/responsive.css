@@ -39,7 +39,9 @@
 }
 
 .hero {
-	padding: var(--rhythm-section) 0;
+	/* Room under the type for the scroll cue, which sits closer to the
+	   bottom edge on a phone. */
+	padding: var(--rhythm-section) 0 var(--rhythm-chapter);
 }
 
 .hero-scroll {

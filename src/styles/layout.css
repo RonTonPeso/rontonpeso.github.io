@@ -22,14 +22,17 @@ larger than the gap between anything inside a section. */
 	position: relative;
 	isolation: isolate;
 	display: grid;
-	align-content: center;
+	/* Anchored low, not centred. A centred block in a 100svh box leaves a big
+	   accidental-looking gap above the scroll cue; sitting the type on the
+	   baseline of the first screen gives the aurora the space above it. */
+	align-content: end;
 	width: min(var(--page), calc(100% - var(--gutter) * 2));
 	/* svh, not vh: mobile browser chrome should not push the scroll
 	cue off screen. The old calc(100vh - 68px) subtracted the height
 	of a nav that is position:absolute and out of flow. */
 	min-height: 100svh;
 	margin: 0 auto;
-	padding: var(--rhythm-chapter) 0 var(--rhythm-section);
+	padding: var(--rhythm-chapter) 0 var(--rhythm-chapter);
 }
 
 .hero-content {
