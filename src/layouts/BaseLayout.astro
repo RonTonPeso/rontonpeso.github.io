@@ -1,5 +1,6 @@
 ---
 import { basePath, withBase } from "../lib/paths";
+import "../styles/tokens.css";
 import "../styles/fonts.css";
 const {
 	title = "Ronnie Wang",
@@ -7,6 +8,7 @@ const {
 } = Astro.props;
 
 const pathname = Astro.url.pathname;
+const isHome = pathname === basePath || pathname === basePath.slice(0, -1);
 const currentPath = pathname.startsWith(basePath)
 	? `/${pathname.slice(basePath.length)}`
 	: pathname;
@@ -78,20 +80,8 @@ const personLd = {
 		<title>{title}</title>
 		<style is:global>
 			:root {
-				--ink: #f5f7ec;
-				--ink-muted: #b8c6c6;
-				--ink-soft: #84989a;
-				--night-deep: #02060a;
-				--line: rgba(191, 246, 228, 0.2);
-				--line-strong: rgba(201, 255, 238, 0.42);
-				--green: #70ff9e;
-				--cyan: #61f2ff;
-				--violet: #b572ff;
-				--shadow: 0 28px 90px rgba(0, 0, 0, 0.36);
-				--page: 1120px;
-				--radius: 8px;
 				color: var(--ink);
-				background: var(--night-deep);
+				background: var(--ground);
 				font-family: var(--font-body);
 			}
 
@@ -100,8 +90,7 @@ const personLd = {
 			}
 
 			html {
-				background: var(--night-deep);
-				scroll-behavior: smooth;
+				background: var(--ground);
 			}
 
 			body {
@@ -109,95 +98,50 @@ const personLd = {
 				margin: 0;
 				min-height: 100vh;
 				overflow-x: hidden;
-				/* deep polar night with ambient aurora skyglow bleeding from the top */
-				background:
-					radial-gradient(135% 70% at 50% -12%, rgba(112, 255, 158, 0.12), transparent 56%),
-					radial-gradient(90% 60% at 82% -4%, rgba(181, 114, 255, 0.11), transparent 60%),
-					radial-gradient(80% 55% at 18% 2%, rgba(97, 242, 255, 0.09), transparent 60%),
-					linear-gradient(180deg, rgba(2, 6, 10, 0.22), var(--night-deep) 70%),
-					linear-gradient(158deg, #04111c 0%, #061826 42%, #0d0a1e 100%);
+				background: var(--ground);
 				color: var(--ink);
 			}
 
-			/* aurora curtains: near-vertical rays that ripple and drift sideways */
-			body::before {
-				position: fixed;
-				inset: -16vh -22vw auto -22vw;
+			/* The aurora. One event, at the top of the home page, in the accent
+			   hue only. Everywhere else the ground is just the ground. */
+			body[data-route="home"]::before {
+				position: absolute;
+				inset: 0 0 auto;
 				z-index: 0;
-				height: 88vh;
-				background:
-					repeating-linear-gradient(
-						95deg,
-						transparent 0 2.4rem,
-						rgba(112, 255, 158, 0.17) 3.3rem,
-						rgba(97, 242, 255, 0.21) 4.6rem,
-						transparent 6rem 8.5rem
-					),
-					repeating-linear-gradient(
-						87deg,
-						transparent 0 3.2rem,
-						rgba(181, 114, 255, 0.14) 4.8rem,
-						rgba(84, 137, 255, 0.16) 6.4rem,
-						transparent 8rem 12.5rem
-					);
-				background-size: 220% 100%, 250% 100%;
-				background-position: 0% 0%, 100% 0%;
+				height: 70vh;
+				background: repeating-linear-gradient(
+					93deg,
+					transparent 0 3rem,
+					var(--aurora) 4.5rem,
+					transparent 7rem 13rem
+				);
 				content: "";
-				filter: blur(34px) saturate(165%);
-				mask-image: linear-gradient(
-					to bottom,
-					rgba(0, 0, 0, 0.96) 0%,
-					rgba(0, 0, 0, 0.55) 42%,
-					transparent 82%
-				);
-				-webkit-mask-image: linear-gradient(
-					to bottom,
-					rgba(0, 0, 0, 0.96) 0%,
-					rgba(0, 0, 0, 0.55) 42%,
-					transparent 82%
-				);
-				opacity: 0.95;
+				filter: blur(40px);
+				mask-image: linear-gradient(to bottom, #000 0%, transparent 78%);
+				-webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 78%);
 				pointer-events: none;
-				transform: skewX(-8deg);
-				animation: aurora-drift 28s ease-in-out infinite alternate;
+				transform: skewX(-7deg);
 			}
 
-			/* starfield: scattered points, densest near the top, gentle twinkle */
-			body::after {
-				position: fixed;
-				inset: 0;
-				z-index: 0;
-				background-image:
-					radial-gradient(1.5px 1.5px at 12% 16%, rgba(255, 255, 255, 0.9), transparent 60%),
-					radial-gradient(1.5px 1.5px at 27% 40%, rgba(214, 247, 255, 0.8), transparent 60%),
-					radial-gradient(1px 1px at 41% 11%, rgba(255, 255, 255, 0.75), transparent 60%),
-					radial-gradient(1.5px 1.5px at 56% 26%, rgba(255, 255, 255, 0.85), transparent 60%),
-					radial-gradient(1px 1px at 67% 14%, rgba(214, 247, 255, 0.7), transparent 60%),
-					radial-gradient(1.5px 1.5px at 81% 34%, rgba(255, 255, 255, 0.8), transparent 60%),
-					radial-gradient(1px 1px at 91% 20%, rgba(255, 255, 255, 0.7), transparent 60%),
-					radial-gradient(1px 1px at 19% 58%, rgba(255, 255, 255, 0.58), transparent 60%),
-					radial-gradient(1px 1px at 48% 52%, rgba(255, 255, 255, 0.5), transparent 60%),
-					radial-gradient(1.5px 1.5px at 73% 60%, rgba(255, 255, 255, 0.6), transparent 60%),
-					radial-gradient(1px 1px at 34% 70%, rgba(255, 255, 255, 0.42), transparent 60%),
-					radial-gradient(1px 1px at 88% 64%, rgba(255, 255, 255, 0.4), transparent 60%),
-					radial-gradient(1px 1px at 6% 36%, rgba(255, 255, 255, 0.55), transparent 60%),
-					radial-gradient(1px 1px at 62% 6%, rgba(255, 255, 255, 0.65), transparent 60%);
-				content: "";
-				mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.45) 55%, transparent 88%);
-				-webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.45) 55%, transparent 88%);
-				opacity: 0.85;
-				pointer-events: none;
-				animation: twinkle 7s ease-in-out infinite alternate;
-			}
 
 			a {
 				color: inherit;
 				text-decoration: none;
 			}
 
-			a:focus-visible {
-				outline: 3px solid var(--cyan);
-				outline-offset: 4px;
+			:focus-visible {
+				outline: 2px solid var(--accent);
+				outline-offset: 3px;
+				border-radius: 1px;
+			}
+
+			::selection {
+				background: var(--accent);
+				color: var(--ground);
+			}
+
+			:root {
+				caret-color: var(--accent);
 			}
 
 			/* no bar: nav floats on the sky. Children stay clickable, the strip itself doesn't block the hero. */
@@ -229,8 +173,6 @@ const personLd = {
 				font-size: 1.05rem;
 				font-weight: 800;
 				letter-spacing: -0.01em;
-				/* dark halo keeps the text legible against bright aurora */
-				text-shadow: 0 1px 16px rgba(3, 9, 16, 0.95), 0 0 30px rgba(3, 9, 16, 0.7);
 			}
 
 			.site-mark {
@@ -238,8 +180,7 @@ const personLd = {
 				height: 2.1rem;
 				border: 1px solid var(--line-strong);
 				border-radius: 50%;
-				background: rgba(255, 255, 255, 0.08);
-				box-shadow: 0 0 26px rgba(97, 242, 255, 0.32), inset 0 0 12px rgba(112, 255, 158, 0.2);
+				background: var(--ground-lift);
 				object-fit: cover;
 			}
 
@@ -250,7 +191,6 @@ const personLd = {
 				font-size: 0.84rem;
 				letter-spacing: 0.04em;
 				text-transform: uppercase;
-				text-shadow: 0 1px 16px rgba(3, 9, 16, 0.95), 0 0 30px rgba(3, 9, 16, 0.7);
 			}
 
 			.nav-links a {
@@ -259,7 +199,7 @@ const personLd = {
 			}
 
 			.nav-links a[aria-current="page"] {
-				color: var(--green);
+				color: var(--accent);
 			}
 
 			.nav-links a[aria-current="page"]::after {
@@ -269,15 +209,13 @@ const personLd = {
 				left: 0;
 				height: 2px;
 				border-radius: 2px;
-				background: linear-gradient(90deg, var(--green), var(--cyan));
-				box-shadow: 0 0 12px rgba(112, 255, 158, 0.6);
+				background: var(--accent);
 				content: "";
 			}
 
 			.nav-links a:hover,
 			.nav-links a:focus-visible {
-				color: var(--green);
-				text-shadow: 0 0 18px rgba(112, 255, 158, 0.55), 0 1px 16px rgba(3, 9, 16, 0.9);
+				color: var(--accent);
 			}
 
 			main {
@@ -295,20 +233,6 @@ const personLd = {
 				padding: 7rem 0;
 			}
 
-			.page-section::before {
-				position: absolute;
-				inset: 1rem -8vw auto;
-				z-index: -1;
-				height: 30rem;
-				/* soft radial blooms, no hard edges */
-				background:
-					radial-gradient(50% 70% at 24% 28%, rgba(112, 255, 158, 0.13), transparent 70%),
-					radial-gradient(52% 72% at 68% 36%, rgba(84, 137, 255, 0.12), transparent 72%);
-				content: "";
-				filter: blur(48px);
-				opacity: 0.9;
-				pointer-events: none;
-			}
 
 			.hero {
 				position: relative;
@@ -321,21 +245,6 @@ const personLd = {
 				padding: 7rem 0 9rem;
 			}
 
-			.hero::before {
-				position: absolute;
-				inset: -4rem -12vw auto -6vw;
-				z-index: -1;
-				height: 34rem;
-				/* organic aurora bloom that fades to nothing, no rectangle */
-				background:
-					radial-gradient(58% 80% at 72% 32%, rgba(112, 255, 158, 0.22), transparent 70%),
-					radial-gradient(56% 76% at 48% 28%, rgba(97, 242, 255, 0.17), transparent 72%),
-					radial-gradient(52% 72% at 28% 44%, rgba(181, 114, 255, 0.18), transparent 72%);
-				content: "";
-				filter: blur(52px);
-				opacity: 0.85;
-				pointer-events: none;
-			}
 
 			.hero-content {
 				position: relative;
@@ -364,52 +273,26 @@ const personLd = {
 				animation-delay: 560ms;
 			}
 
-			/* the name: letters filled by a drifting aurora gradient */
 			.hero h1.hero-name {
 				font-size: clamp(3.4rem, 13vw, 9.5rem);
 				line-height: 0.92;
 				letter-spacing: -0.045em;
-				text-shadow: none;
-				/* glow lives on the parent, not the clipped lines, so it can't crop descenders */
-				filter:
-					drop-shadow(0 0 42px rgba(97, 242, 255, 0.22))
-					drop-shadow(0 0 90px rgba(112, 255, 158, 0.14));
 			}
 
 			.hero-line {
 				display: block;
-				/* extend the gradient paint area below the baseline so descenders (g) are never
-				   cropped by background-clip: text; the negative margin cancels the layout shift */
-				padding-bottom: 0.34em;
-				margin-bottom: -0.34em;
-				background: linear-gradient(
-					100deg,
-					#c7ffe0 0%,
-					var(--green) 20%,
-					var(--cyan) 44%,
-					#9fd0ff 60%,
-					var(--violet) 80%,
-					#ecd8ff 100%
-				);
-				background-size: 220% 100%;
-				background-clip: text;
-				-webkit-background-clip: text;
-				color: transparent;
-				-webkit-text-fill-color: transparent;
-				animation: name-shimmer 14s ease-in-out infinite alternate;
 			}
 
 			.hero-line:nth-child(2) {
 				margin-left: 0.06em;
-				animation-delay: -7s;
 			}
 
 			.hero-blurb .hl-ai {
-				color: var(--cyan);
+				color: var(--accent);
 			}
 
 			.hero-blurb .hl-peng {
-				color: var(--green);
+				color: var(--accent);
 			}
 
 			.hero-meta {
@@ -443,8 +326,7 @@ const personLd = {
 				height: 7px;
 				margin-right: 0.5rem;
 				border-radius: 50%;
-				background: var(--green);
-				box-shadow: 0 0 10px var(--green);
+				background: var(--accent);
 				animation: pulse 2.4s ease-in-out infinite;
 			}
 
@@ -474,28 +356,26 @@ const personLd = {
 			}
 
 			.btn-primary {
-				color: var(--night-deep);
-				background: linear-gradient(100deg, var(--green), var(--cyan));
-				box-shadow: 0 0 0 1px rgba(112, 255, 158, 0.4), 0 14px 40px rgba(112, 255, 158, 0.18);
+				color: var(--ground);
+				background: var(--accent);
 			}
 
 			.btn-primary:hover,
 			.btn-primary:focus-visible {
 				transform: translateY(-2px);
-				box-shadow: 0 0 0 1px rgba(112, 255, 158, 0.65), 0 18px 52px rgba(112, 255, 158, 0.32);
 			}
 
 			.btn-ghost {
 				color: var(--ink);
 				border: 1px solid var(--line-strong);
-				background: rgba(255, 255, 255, 0.03);
+				background: transparent;
 			}
 
 			.btn-ghost:hover,
 			.btn-ghost:focus-visible {
 				transform: translateY(-2px);
-				border-color: var(--green);
-				color: var(--green);
+				border-color: var(--accent);
+				color: var(--accent);
 			}
 
 			.btn-icon {
@@ -522,7 +402,7 @@ const personLd = {
 
 			.hero-scroll:hover,
 			.hero-scroll:focus-visible {
-				color: var(--green);
+				color: var(--accent);
 			}
 
 			.scroll-line {
@@ -537,15 +417,14 @@ const personLd = {
 				position: absolute;
 				inset: 0;
 				width: 42%;
-				background: var(--green);
-				box-shadow: 0 0 8px var(--green);
+				background: var(--accent);
 				content: "";
 				animation: scroll-sweep 2.2s ease-in-out infinite;
 			}
 
 			.kicker {
 				margin: 0 0 1rem;
-				color: var(--green);
+				color: var(--accent);
 				font-size: 0.8rem;
 				font-weight: 600;
 				letter-spacing: 0;
@@ -562,8 +441,6 @@ const personLd = {
 				letter-spacing: -0.025em;
 				line-height: 0.92;
 				text-wrap: balance;
-				/* faint aurora glow lifting the name off the night sky */
-				text-shadow: 0 0 48px rgba(97, 242, 255, 0.18), 0 0 90px rgba(112, 255, 158, 0.12);
 			}
 
 			.blurb {
@@ -611,12 +488,7 @@ const personLd = {
 				position: absolute;
 				inset: 0;
 				z-index: -1;
-				background: linear-gradient(
-					90deg,
-					rgba(112, 255, 158, 0.09),
-					rgba(97, 242, 255, 0.05) 38%,
-					transparent 68%
-				);
+				background: linear-gradient(90deg, var(--aurora), transparent 62%);
 				content: "";
 				opacity: 0;
 				transition: opacity 240ms ease;
@@ -640,9 +512,8 @@ const personLd = {
 				height: 3.4rem;
 				border: 1px solid var(--line-strong);
 				border-radius: 12px;
-				background: linear-gradient(150deg, rgba(20, 35, 48, 0.85), rgba(8, 15, 25, 0.75));
-				box-shadow: inset 0 0 18px rgba(97, 242, 255, 0.08);
-				color: var(--green);
+				background: var(--ground-lift);
+				color: var(--accent);
 				font-family: var(--font-display);
 				font-size: 1.5rem;
 				font-weight: 800;
@@ -661,14 +532,13 @@ const personLd = {
 
 			.project-row:hover .row-logo,
 			.project-row:focus-within .row-logo {
-				border-color: rgba(112, 255, 158, 0.5);
-				box-shadow: inset 0 0 18px rgba(112, 255, 158, 0.12), 0 0 22px rgba(112, 255, 158, 0.1);
+				border-color: var(--accent);
 			}
 
 			.row-kind {
 				display: inline-block;
 				margin: 0 0 0.55rem;
-				color: var(--cyan);
+				color: var(--accent);
 				font-size: 0.74rem;
 				font-weight: 500;
 				letter-spacing: 0.08em;
@@ -691,7 +561,7 @@ const personLd = {
 
 			.project-row:hover .row-link,
 			.row-link:focus-visible {
-				color: var(--green);
+				color: var(--accent);
 			}
 
 			.row-arrow {
@@ -699,7 +569,7 @@ const personLd = {
 				margin-left: 0.5rem;
 				/* Fraunces draws no U+2192; Karrik does. Keep the arrow in the body face. */
 				font-family: var(--font-body);
-				color: var(--green);
+				color: var(--accent);
 				font-size: 0.62em;
 				opacity: 0;
 				transform: translate(-5px, 5px);
@@ -738,9 +608,9 @@ const personLd = {
 			}
 
 			.project-tags li {
-				border: 1px solid rgba(112, 255, 158, 0.24);
+				border: 1px solid var(--line);
 				border-radius: 999px;
-				background: rgba(112, 255, 158, 0.05);
+				background: transparent;
 				color: var(--ink-muted);
 				font-size: 0.72rem;
 				letter-spacing: 0.02em;
@@ -769,7 +639,7 @@ const personLd = {
 			.back-link {
 				display: inline-block;
 				margin-bottom: 2rem;
-				color: var(--green);
+				color: var(--accent);
 				font-size: 0.9rem;
 				font-weight: 700;
 			}
@@ -822,8 +692,8 @@ const personLd = {
 				min-height: 420px;
 				margin-top: 2rem;
 				border: 1px solid var(--line);
-				border-radius: var(--radius);
-				background: rgba(255, 255, 255, 0.06);
+				border-radius: var(--radius-edge);
+				background: var(--ground-lift);
 			}
 
 			.text-page {
@@ -844,24 +714,13 @@ const personLd = {
 				animation: reveal-up 740ms ease-out both;
 			}
 
-			.about-photo::before {
-				position: absolute;
-				inset: -1px;
-				z-index: -1;
-				border-radius: var(--radius);
-				background: linear-gradient(135deg, var(--green), var(--cyan), var(--violet));
-				content: "";
-				filter: blur(18px);
-				opacity: 0.42;
-			}
 
 			.about-photo img {
 				display: block;
 				width: 100%;
 				aspect-ratio: 4 / 5;
 				border: 1px solid var(--line-strong);
-				border-radius: var(--radius);
-				box-shadow: var(--shadow);
+				border-radius: var(--radius-edge);
 				object-fit: cover;
 				object-position: 50% 38%;
 			}
@@ -892,7 +751,7 @@ const personLd = {
 			}
 
 			.about-facts dt {
-				color: var(--cyan);
+				color: var(--accent);
 				font-size: 0.7rem;
 				letter-spacing: 0.08em;
 				text-transform: uppercase;
@@ -921,13 +780,13 @@ const personLd = {
 			}
 
 			.footer-line a {
-				color: var(--green);
+				color: var(--accent);
 				transition: color 180ms ease;
 			}
 
 			.footer-line a:hover,
 			.footer-line a:focus-visible {
-				color: var(--cyan);
+				color: var(--accent);
 			}
 
 			/* scroll reveal: only hides when JS marks the page ready, so no-JS stays visible */
@@ -945,22 +804,11 @@ const personLd = {
 				transition-delay: calc(var(--card-index, 0) * 80ms);
 			}
 
-			@keyframes aurora-drift {
-				from {
-					background-position: 0% 0%, 100% 0%;
-					transform: skewX(-8deg) translate3d(-2vw, 0, 0);
-				}
-
 				to {
 					background-position: 32% 0%, 68% 0%;
 					transform: skewX(-4deg) translate3d(3vw, 1.5vh, 0);
 				}
 			}
-
-			@keyframes twinkle {
-				from {
-					opacity: 0.58;
-				}
 
 				to {
 					opacity: 0.95;
@@ -990,11 +838,6 @@ const personLd = {
 					transform: translateY(0);
 				}
 			}
-
-			@keyframes name-shimmer {
-				from {
-					background-position: 0% 50%;
-				}
 
 				to {
 					background-position: 100% 50%;
@@ -1129,7 +972,7 @@ const personLd = {
 			}
 		</style>
 	</head>
-	<body>
+	<body data-route={isHome ? "home" : undefined}>
 		<header class="site-nav">
 			<a class="site-name" href={withBase("/")}>
 				<img class="site-mark" src={penguinImage} alt="" />

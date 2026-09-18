@@ -1,0 +1,36 @@
+/*
+ * The whole palette. Nothing outside this file names a colour.
+ *
+ * Built in OKLCH so lightness can be tuned against contrast targets without
+ * the hue drifting. Every neutral is tinted to hue 200-220, the cold end of
+ * the aurora, so the greys belong to the palette instead of sitting on top
+ * of it. There is exactly one accent, and per DIRECTION.md it does four jobs:
+ * the aurora, the rule between project rows, the link underline, and the
+ * terminal cursor. If something green is not one of those, it is a bug.
+ *
+ * Measured against --ground (see the contrast column); WCAG wants 4.5:1 for
+ * body text and 3:1 for large text and UI boundaries.
+ */
+
+:root {
+	color-scheme: dark;
+
+	--ground: oklch(0.15 0.018 220); /*  1.00:1  page */
+	--ground-lift: oklch(0.2 0.02 220); /*  1.09:1  raised panels */
+	--ink: oklch(0.95 0.012 200); /* 17.04:1  headings */
+	--ink-muted: oklch(0.78 0.02 200); /*  9.89:1  body copy */
+	--ink-soft: oklch(0.64 0.022 205); /*  5.89:1  labels, captions */
+	--line: oklch(0.34 0.022 205); /*  1.69:1  hairline separators */
+	--line-strong: oklch(0.49 0.028 205); /*  3.12:1  interactive boundaries */
+	--accent: oklch(0.84 0.185 155); /* 12.88:1  the trace */
+
+	/* The aurora is the accent at low alpha. It is not a second colour. */
+	--aurora: oklch(0.84 0.185 155 / 0.16);
+
+	/* Two radii, held everywhere. Pills because the buttons are pills; 4px
+	   for anything with a flat edge. Nested radii get reduced, never copied. */
+	--radius-pill: 999px;
+	--radius-edge: 4px;
+
+	--page: 1120px;
+}
