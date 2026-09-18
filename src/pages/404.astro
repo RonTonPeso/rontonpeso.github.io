@@ -1,0 +1,25 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBase } from "../lib/paths";
+---
+
+<BaseLayout
+	title="No page at this address"
+	description="That URL does not resolve to anything on ronniewang.com. Links back to the projects index and the home page."
+>
+	<section class="page-section text-page error-page">
+		<p class="kicker">404</p>
+		<h1 class="page-title">Nothing here</h1>
+		<div class="prose">
+			<p>
+				That address does not resolve to a page. It may have been a project that got
+				renamed, or a typo, or a link I broke myself and have not noticed yet. The two
+				places worth going are below.
+			</p>
+		</div>
+		<div class="link-row" aria-label="Where to go instead">
+			<a class="text-link" href={withBase("/projects")}>All six projects</a>
+			<a class="text-link" href={withBase("/")}>Back to the start</a>
+		</div>
+	</section>
+</BaseLayout>

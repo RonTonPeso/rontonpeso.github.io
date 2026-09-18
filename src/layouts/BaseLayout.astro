@@ -13,7 +13,7 @@ const currentPath = pathname.startsWith(basePath)
 	? `/${pathname.slice(basePath.length)}`
 	: pathname;
 const penguinImage = withBase("penguin_profile.png");
-const socialImage = new URL(penguinImage, Astro.site ?? Astro.url).toString();
+const socialImage = new URL(withBase("og.png"), Astro.site ?? Astro.url).toString();
 
 const canonicalURL = new URL(pathname, Astro.site ?? Astro.url).toString();
 const homeURL = new URL(withBase("/"), Astro.site ?? Astro.url).toString();
@@ -25,7 +25,7 @@ const personLd = {
 	name: "Ronnie Wang",
 	alternateName: "Ronald Wang",
 	url: homeURL,
-	image: socialImage,
+	image: new URL(penguinImage, Astro.site ?? Astro.url).toString(),
 	jobTitle: "Software Engineer",
 	alumniOf: {
 		"@type": "CollegeOrUniversity",
@@ -64,12 +64,19 @@ const personLd = {
 		<meta property="og:description" content={description} />
 		<meta property="og:type" content="website" />
 		<meta property="og:image" content={socialImage} />
-		<meta name="twitter:card" content="summary" />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content="Ronnie Wang, set in Fraunces on a dark ground, under a green aurora." />
+		<meta property="og:site_name" content="Ronnie Wang" />
+		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={socialImage} />
 		<script type="application/ld+json" is:inline set:html={JSON.stringify(personLd)} />
-		<link rel="icon" type="image/png" href={penguinImage} />
+		<link rel="icon" type="image/png" sizes="32x32" href={withBase("favicon-32.png")} />
+		<link rel="apple-touch-icon" sizes="180x180" href={withBase("apple-touch-icon.png")} />
+		<link rel="manifest" href={withBase("site.webmanifest")} />
+		<meta name="theme-color" content="#040d10" />
 		<link
 			rel="preload"
 			href={withBase("fonts/fraunces-display.woff2")}
@@ -162,6 +169,33 @@ const personLd = {
 			.site-nav a,
 			.site-nav nav {
 				pointer-events: auto;
+			}
+
+			.skip-link {
+				position: absolute;
+				top: var(--s2);
+				left: var(--s2);
+				z-index: 20;
+				padding: var(--s2) var(--s4);
+				border-radius: var(--radius-edge);
+				background: var(--accent);
+				color: var(--ground);
+				font-size: var(--t-sm);
+				letter-spacing: var(--track-label);
+				text-transform: uppercase;
+				transform: translateY(-200%);
+			}
+
+			.skip-link:focus-visible {
+				transform: translateY(0);
+			}
+
+			main:focus {
+				outline: none;
+			}
+
+			.error-page .link-row {
+				gap: var(--s5);
 			}
 
 			.site-name {
@@ -908,6 +942,40 @@ const personLd = {
 				}
 			}
 
+			@media print {
+				/* Paper is not a polar night. Ink on white, no aurora, and the
+				   URLs behind links printed out since they cannot be clicked. */
+				:root {
+					--ground: #fff;
+					--ink: #111;
+					--ink-muted: #222;
+					--ink-soft: #444;
+					--line: #ccc;
+					--line-strong: #999;
+					--accent: #111;
+				}
+
+				body[data-route="home"]::before,
+				.site-nav,
+				.hero-scroll,
+				.skip-link,
+				.demo-panel {
+					display: none;
+				}
+
+				.hero,
+				.page-section {
+					min-height: 0;
+					padding: 0 0 var(--s6);
+				}
+
+				a[href^="http"]::after {
+					content: " (" attr(href) ")";
+					font-size: var(--t-xs);
+					word-break: break-all;
+				}
+			}
+
 			@media (prefers-reduced-motion: reduce) {
 				/* A genuine no-motion path, not a 1ms duration. Nothing moves;
 				   hover and focus still change colour, so states stay legible. */
@@ -925,9 +993,10 @@ const personLd = {
 		</style>
 	</head>
 	<body data-route={isHome ? "home" : undefined}>
+		<a class="skip-link" href="#main">Skip to content</a>
 		<header class="site-nav">
 			<a class="site-name" href={withBase("/")}>
-				<img class="site-mark" src={penguinImage} alt="" />
+				<img class="site-mark" src={penguinImage} alt="" width="34" height="34" />
 				<span>Ronnie Wang</span>
 			</a>
 			<nav class="nav-links" aria-label="Main navigation">
@@ -943,7 +1012,7 @@ const personLd = {
 				>
 			</nav>
 		</header>
-		<main>
+		<main id="main" tabindex="-1">
 			<slot />
 		</main>
 		<footer class="site-footer">

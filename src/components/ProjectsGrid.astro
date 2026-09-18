@@ -15,7 +15,14 @@ const { projects = defaultProjects, heading = "Projects" } = Astro.props;
 						{String(index + 1).padStart(2, "0")}
 					</span>
 					{project.logo && (
-						<img class="row-logo" src={`${basePath}${project.logo}`} alt={`${project.title} logo`} />
+						<img
+							class="row-logo"
+							src={`${basePath}${project.logo}`}
+							alt=""
+							width="40"
+							height="46"
+							loading="lazy"
+						/>
 					)}
 					<div class="row-body">
 						{project.kind && <span class="row-kind">{project.kind}</span>}

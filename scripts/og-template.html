@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			@font-face {
+				font-family: "Fraunces Display";
+				src: url("http://localhost:4321/fonts/fraunces-display.woff2") format("woff2-variations");
+				font-weight: 700;
+			}
+			@font-face {
+				font-family: "Karrik";
+				src: url("http://localhost:4321/fonts/karrik-regular.woff2") format("woff2");
+				font-weight: 400;
+			}
+			@font-face {
+				font-family: "Karrik";
+				src: url("http://localhost:4321/fonts/karrik-italic.woff2") format("woff2");
+				font-weight: 400;
+				font-style: italic;
+			}
+			* {
+				margin: 0;
+				box-sizing: border-box;
+			}
+			body {
+				width: 1200px;
+				height: 630px;
+				overflow: hidden;
+				position: relative;
+				background: oklch(0.15 0.018 220);
+				color: oklch(0.95 0.012 200);
+				font-family: "Karrik", sans-serif;
+				display: flex;
+				flex-direction: column;
+				justify-content: flex-end;
+				padding: 76px 84px;
+			}
+			/* the same aurora, same token, same one hue */
+			body::before {
+				content: "";
+				position: absolute;
+				inset: 0 0 auto;
+				height: 70%;
+				background: repeating-linear-gradient(
+					93deg,
+					transparent 0 48px,
+					oklch(0.84 0.185 155 / 0.16) 72px,
+					transparent 112px 208px
+				);
+				filter: blur(40px);
+				mask-image: linear-gradient(to bottom, #000 0%, transparent 78%);
+				transform: skewX(-7deg);
+			}
+			h1 {
+				position: relative;
+				font-family: "Fraunces Display", serif;
+				font-weight: 700;
+				font-size: 132px;
+				line-height: 0.95;
+				letter-spacing: -0.025em;
+			}
+			p {
+				position: relative;
+				margin-top: 26px;
+				font-size: 30px;
+				color: oklch(0.78 0.02 200);
+			}
+			em {
+				font-style: italic;
+			}
+			.rule {
+				position: relative;
+				width: 132px;
+				height: 2px;
+				margin-bottom: 40px;
+				background: oklch(0.84 0.185 155);
+			}
+			.meta {
+				position: relative;
+				margin-top: 34px;
+				font-size: 22px;
+				letter-spacing: 0.08em;
+				text-transform: uppercase;
+				color: oklch(0.64 0.022 205);
+			}
+		</style>
+	</head>
+	<body>
+		<div class="rule"></div>
+		<h1>Ronnie Wang</h1>
+		<p>Software engineer passionate about <em>AI</em> and <em>penguins</em>.</p>
+		<p class="meta">Computer science · Penn · Philadelphia</p>
+	</body>
+</html>
